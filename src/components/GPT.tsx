@@ -52,9 +52,7 @@ export const GPT: React.FC = () => {
   return (
     <div className="flex items-center justify-center h-screen min-w-full overflow-hidden bg-gray-800 snap-start">
       <div
-        className={` container ${
-          !isAsked ? "min-h-full  " : "min-h-full"
-        } max-w-3xl text-center relative text-white min-w-fit`}
+        className={` container h-full max-h-screen max-w-3xl  overflow-hidden text-center relative text-white min-w-fit`}
       >
         {/* <div className="relative flex flex-col items-center justify-center col-start-2 row-start-1 gap-2 top-24">
           <h1 className="mt-4 text-4xl font-bold tracking-tighter ">
@@ -67,7 +65,7 @@ export const GPT: React.FC = () => {
         </div> */}
 
         {!isAsked ? (
-          <div className="relative grid justify-center grid-cols-3 grid-rows-3 mx-auto text-center text-white bottom-8 h-fit max-w-fit">
+          <div className="relative grid justify-center h-full grid-cols-3 grid-rows-3 mx-auto overflow-y-hidden text-center text-white bottom-16 max-w-fit">
             <div className="flex flex-col items-center col-start-1 row-start-2 gap-4 p-4 ">
               <div className="flex flex-col items-center justify-center gap-2 w-52 ">
                 <svg
@@ -170,26 +168,115 @@ export const GPT: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="grid justify-center w-full max-w-3xl grid-cols-2 grid-rows-3 text-center text-white ">
-            <div className="relative min-w-full col-span-2 col-start-1 row-start-2 gap-4 text-center text-white bottom-16 ">
-              <div className="flex w-full gap-2 px-2 py-4 border bg-slate-600 h-fit">
-                <h1>Visitor - </h1>
+          <div className="relative grid justify-center w-full max-w-3xl max-h-screen grid-cols-2 grid-rows-3 mt-8 overflow-y-auto text-center text-white h-4/5 ">
+            <div className="relative min-w-full col-span-2 col-start-1 row-start-1 gap-4 text-center text-white ">
+              <div className="flex w-full gap-2 px-2 py-4 border gap- bg-slate-600 h-fit">
+                <h1 className="">Visitor</h1>
                 <h1 className=""> {question}</h1>
               </div>
               <div
                 onClick={() => setIsAsked((prevState) => !prevState)}
-                className="flex gap-2 px-2 py-4 border h-fit "
+                className="flex gap-3 px-2 py-4 border h-fit "
               >
-                <h1>Umut - </h1>
-                {/* <h1 className="tracking-tight ">
-                  <Typewriter
+                <h1>Umut </h1>
+                <h1 className="tracking-tight text-start ">
+                  {/* <Typewriter
                     options={{
                       strings: ANSWERS[0],
                       autoStart: true,
                       delay: 40,
                     }}
-                  />
-                </h1> */}
+                  /> */}{" "}
+                  " Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum
+                  similique voluptatum laudantium maxime, ab reiciendis dolore
+                  magnam cumque quam natus suscipit nulla reprehenderit illo
+                  voluptatibus eveniet optio eaque! Nulla iusto officiis laborum
+                  sit ducimus ex soluta at, amet, itaque tenetur modi, rem
+                  officia reprehenderit odit quam suscipit quos quisquam nam
+                  placeat? Laboriosam nulla aspernatur accusamus exercitationem
+                  cupiditate incidunt aliquam repudiandae quod repellendus,
+                  consequatur ",
+                </h1>
+              </div>
+              <div className="flex w-full gap-2 px-2 py-4 border gap- bg-slate-600 h-fit">
+                <h1>Visitor</h1>
+                <h1 className=""> {question}</h1>
+              </div>
+              <div
+                onClick={() => setIsAsked((prevState) => !prevState)}
+                className="flex gap-3 px-2 py-4 border h-fit "
+              >
+                <h1>Umut </h1>
+                <h1 className="tracking-tight text-start ">
+                  {/* <Typewriter
+                    options={{
+                      strings: ANSWERS[0],
+                      autoStart: true,
+                      delay: 40,
+                    }}
+                  /> */}{" "}
+                  " Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum
+                  similique voluptatum laudantium maxime, ab reiciendis dolore
+                  magnam cumque quam natus suscipit nulla reprehenderit illo
+                  voluptatibus eveniet optio eaque! Nulla iusto officiis laborum
+                  sit ducimus ex soluta at, amet, itaque tenetur modi, rem
+                  officia reprehenderit odit quam suscipit quos quisquam nam
+                  placeat? Laboriosam nulla aspernatur accusamus exercitationem
+                  cupiditate incidunt aliquam repudiandae quod repellendus,
+                  consequatur ",
+                </h1>
+              </div>
+              <div
+                onClick={() => setIsAsked((prevState) => !prevState)}
+                className="flex gap-3 px-2 py-4 border h-fit "
+              >
+                <h1>Umut </h1>
+                <h1 className="tracking-tight text-start ">
+                  {/* <Typewriter
+                    options={{
+                      strings: ANSWERS[0],
+                      autoStart: true,
+                      delay: 40,
+                    }}
+                  /> */}{" "}
+                  " Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum
+                  similique voluptatum laudantium maxime, ab reiciendis dolore
+                  magnam cumque quam natus suscipit nulla reprehenderit illo
+                  voluptatibus eveniet optio eaque! Nulla iusto officiis laborum
+                  sit ducimus ex soluta at, amet, itaque tenetur modi, rem
+                  officia reprehenderit odit quam suscipit quos quisquam nam
+                  placeat? Laboriosam nulla aspernatur accusamus exercitationem
+                  cupiditate incidunt aliquam repudiandae quod repellendus,
+                  consequatur ",
+                </h1>
+              </div>
+              <div className="flex w-full gap-2 px-2 py-4 border gap- bg-slate-600 h-fit">
+                <h1>Visitor</h1>
+                <h1 className=""> {question}</h1>
+              </div>
+              <div
+                onClick={() => setIsAsked((prevState) => !prevState)}
+                className="flex gap-3 px-2 py-4 border h-fit "
+              >
+                <h1>Umut </h1>
+                <h1 className="tracking-tight text-start ">
+                  {/* <Typewriter
+                    options={{
+                      strings: ANSWERS[0],
+                      autoStart: true,
+                      delay: 40,
+                    }}
+                  /> */}{" "}
+                  " Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum
+                  similique voluptatum laudantium maxime, ab reiciendis dolore
+                  magnam cumque quam natus suscipit nulla reprehenderit illo
+                  voluptatibus eveniet optio eaque! Nulla iusto officiis laborum
+                  sit ducimus ex soluta at, amet, itaque tenetur modi, rem
+                  officia reprehenderit odit quam suscipit quos quisquam nam
+                  placeat? Laboriosam nulla aspernatur accusamus exercitationem
+                  cupiditate incidunt aliquam repudiandae quod repellendus,
+                  consequatur ",
+                </h1>
               </div>
             </div>
             {/* <div className="flex flex-col col-start-2 row-start-3 gap-4 text-center text-white snap-start">
@@ -214,9 +301,7 @@ export const GPT: React.FC = () => {
         )}
         <div
           id="input"
-          className={`absolute ${
-            isAsked ? "bottom-0 pb-1.5" : "bottom-36"
-          }  flex flex-col justify-center w-full `}
+          className={`absolute  flex flex-col justify-center w-full bottom-0 pb-1`}
         >
           <div className="flex items-center w-full py-2">
             <input
