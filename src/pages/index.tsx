@@ -15,7 +15,7 @@ export default function Home() {
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
-      <main className="overflow-scroll snap-y ... snap-mandatory">
+      <main className="w-screen h-screen overflow-scroll snap-y snap-mandatory">
         <Header />
         <GPT />
       </main>

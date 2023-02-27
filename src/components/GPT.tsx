@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
+import Typewriter from "typewriter-effect"
 import { ANSWERS } from "../utils/answers"
+
 export const GPT: React.FC = () => {
   const [question, setQuestion] = useState(
     "What inspired you to become a developer?"
@@ -33,6 +35,8 @@ export const GPT: React.FC = () => {
   const handleClick = (index: number) => {
     const newQuestion = questions[index].replaceAll(`"`, ``)
     setQuestion(newQuestion)
+
+    return <Typewriter />
   }
 
   const answerQuestion = () => {
@@ -46,9 +50,13 @@ export const GPT: React.FC = () => {
   }, [isAsked])
 
   return (
-    <div className="flex items-center justify-center overflow-hidden bg-gray-800 min-w-screen ">
-      <div className="h-full grid-cols-3 grid-rows-2 text-center text-white min-w-fit">
-        <div className="relative flex flex-col items-center justify-center col-start-2 row-start-1 gap-2 top-24">
+    <div className="flex items-center justify-center h-screen min-w-full overflow-hidden bg-gray-800 snap-start">
+      <div
+        className={` container ${
+          !isAsked ? "min-h-full  " : "min-h-full"
+        } max-w-3xl text-center relative text-white min-w-fit`}
+      >
+        {/* <div className="relative flex flex-col items-center justify-center col-start-2 row-start-1 gap-2 top-24">
           <h1 className="mt-4 text-4xl font-bold tracking-tighter ">
             Ask me anything!
           </h1>
@@ -56,11 +64,11 @@ export const GPT: React.FC = () => {
             Type your question below and I'll try to answer it.
           </p>
 
-          {/* <h1 className="relative text-xl tracking-tighter top-12">Examples</h1> */}
-        </div>
-        {isAsked ? (
-          <div className="relative grid h-screen grid-cols-3 col-start-1 grid-rows-3 row-start-2 text-center text-white snap-start min-w-fit ">
-            <div className="relative flex flex-col items-end col-start-1 row-start-2 gap-4 p-4 ">
+        </div> */}
+
+        {!isAsked ? (
+          <div className="relative grid justify-center grid-cols-3 grid-rows-3 mx-auto text-center text-white bottom-8 h-fit max-w-fit">
+            <div className="flex flex-col items-center col-start-1 row-start-2 gap-4 p-4 ">
               <div className="flex flex-col items-center justify-center gap-2 w-52 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +99,7 @@ export const GPT: React.FC = () => {
                 )
               })}
             </div>
-            <div className="relative flex flex-col items-center col-start-2 row-start-2 gap-4 p-4 ">
+            <div className="flex flex-col items-center col-start-2 row-start-2 gap-4 p-4 ">
               <div className="flex flex-col items-center justify-center gap-2 w-52 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +129,7 @@ export const GPT: React.FC = () => {
                 )
               })}
             </div>
-            <div className="relative flex flex-col items-center col-start-3 row-start-2 gap-4 p-4 text-center ">
+            <div className="flex flex-col items-center col-start-3 row-start-2 gap-4 p-4 ">
               <div className="flex flex-col items-center justify-center gap-2 w-52 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -151,6 +159,7 @@ export const GPT: React.FC = () => {
               {limitations.map((question, index) => {
                 return (
                   <div
+                    onClick={() => setIsAsked((prevState) => !prevState)}
                     key={index}
                     className=" mb-2 w-52 text-sm shadow-lg  transition duration-300 ease-in-out hover:bg-[#32333c] px-3 py-2 rounded-lg bg-[#3E3F4B] font-light tracking-tight"
                   >
@@ -161,23 +170,26 @@ export const GPT: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="relative grid h-screen max-w-3xl grid-cols-2 col-start-1 grid-rows-3 row-start-2 text-center text-white snap-start ">
-            <div className="relative flex flex-col h-screen col-start-1 row-start-2 gap-4 text-center text-white bottom-16 left-44 snap-start ">
-              <div className="flex gap-2 px-2 py-4 border h-fit">
+          <div className="grid justify-center w-full max-w-3xl grid-cols-2 grid-rows-3 text-center text-white ">
+            <div className="relative min-w-full col-span-2 col-start-1 row-start-2 gap-4 text-center text-white bottom-16 ">
+              <div className="flex w-full gap-2 px-2 py-4 border bg-slate-600 h-fit">
                 <h1>Visitor - </h1>
-                <h1> {question}</h1>
+                <h1 className=""> {question}</h1>
               </div>
-              <div className="flex gap-2 px-2 py-4 border h-fit ">
+              <div
+                onClick={() => setIsAsked((prevState) => !prevState)}
+                className="flex gap-2 px-2 py-4 border h-fit "
+              >
                 <h1>Umut - </h1>
-                <h1 className="tracking-tight ">
-                  {/* <Typewriter
-                options={{
-                  strings: ANSWERS[0],
-                  autoStart: true,
-                  delay: 40,
-                }}
-              /> */}
-                </h1>
+                {/* <h1 className="tracking-tight ">
+                  <Typewriter
+                    options={{
+                      strings: ANSWERS[0],
+                      autoStart: true,
+                      delay: 40,
+                    }}
+                  />
+                </h1> */}
               </div>
             </div>
             {/* <div className="flex flex-col col-start-2 row-start-3 gap-4 text-center text-white snap-start">
@@ -200,10 +212,15 @@ export const GPT: React.FC = () => {
             </div> */}
           </div>
         )}
-        <div className="relative flex flex-col content-center justify-center w-full col-span-3 col-start-1 row-start-2 mt-auto bottom-4">
-          <div className="flex items-center py-2">
+        <div
+          id="input"
+          className={`absolute ${
+            isAsked ? "bottom-0 pb-1.5" : "bottom-36"
+          }  flex flex-col justify-center w-full `}
+        >
+          <div className="flex items-center w-full py-2">
             <input
-              className="min-w-full rounded-lg shadow-lg placeholder:text-sm text-sm placeholder:tracking-tight  px-3.5 py-3  bg-[#40414F] max-w-full  text-white leading-tight focus:outline-none"
+              className=" rounded-lg shadow-lg w-full max-w-2xl  placeholder:text-sm text-sm placeholder:tracking-tight shrink-0  px-3.5 py-3  bg-[#40414F] min-w-full  text-white leading-tight focus:outline-none"
               id="search"
               type="text"
               value={question}
