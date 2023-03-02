@@ -10,3 +10,23 @@
     font-family: "Inter var", sans-serif;
   }
 }
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  /* Change the background color */
+  background-color: #1f2937;
+}
+
+/* Select the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  /* Change the background color */
+  background-color: #959595;
+  border-radius: 2px;
+
+  /* Change the size of the thumb */
+  height: 3px;
+  width: 3px;
+}
