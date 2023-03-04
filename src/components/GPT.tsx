@@ -74,16 +74,16 @@ export const GPT: React.FC = () => {
           {!isAsked ? (
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               key="info"
-              className="relative grid justify-center h-full grid-cols-3 grid-rows-3 mx-auto overflow-y-hidden text-center text-white bottom-16 max-w-fit"
+              className="relative grid items-center justify-center grid-cols-1 grid-rows-3 mx-auto overflow-y-hidden text-center text-white h-fit md:h-full md:grid-cols-3 top-4 md:bottom-16 max-w-fit"
             >
-              <div className="flex flex-col items-center col-start-1 row-start-2 gap-4 p-4 ">
-                <div className="flex flex-col items-center justify-center gap-2 w-52 ">
+              <div className="flex flex-col items-center justify-end col-start-1 row-start-1 gap-3 p-2 md:gap-4 md:p-4 h-fit md:h-full md:justify-center md:row-start-2 ">
+                <div className="flex flex-row items-center justify-center gap-2 md:flex-col w-52 ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-8 h-8"
+                    className="w-6 h-6 md:w-8 md:h-8"
                     viewBox="0 0 512 512"
                   >
                     <title>Book</title>
@@ -103,18 +103,18 @@ export const GPT: React.FC = () => {
                     <button
                       key={index}
                       onClick={() => handleClick(index)}
-                      className=" mb-2 w-52 text-sm shadow-lg  transition duration-300 ease-in-out hover:bg-[#32333c] px-3 py-2 rounded-lg bg-[#3E3F4B] font-light tracking-tight"
+                      className=" mb-2 w-full md:w-52 text-sm shadow-lg  transition duration-300 ease-in-out hover:bg-[#32333c] px-3 py-2 rounded-lg bg-[#3E3F4B] font-light tracking-tight"
                     >
                       <span className="p-1 text-slate-300">{question}</span>
                     </button>
                   )
                 })}
               </div>
-              <div className="flex flex-col items-center col-start-2 row-start-2 gap-4 p-4 ">
-                <div className="flex flex-col items-center justify-center gap-2 w-52 ">
+              <div className="flex flex-col items-center justify-end col-start-1 row-start-2 gap-3 p-2 md:gap-4 h-fit md:h-full md:p-4 md:justify-center md:col-start-2 md:row-start-2 ">
+                <div className="flex flex-row items-center justify-center gap-2 md:flex-col w-52 ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-8 h-8 fill-current"
+                    className="w-6 h-6 fill-current md:w-8 md:h-8"
                     viewBox="0 0 512 512"
                   >
                     <title>Flash</title>
@@ -133,18 +133,18 @@ export const GPT: React.FC = () => {
                   return (
                     <div
                       key={index}
-                      className=" mb-2 w-52 text-sm shadow-lg  transition duration-300 ease-in-out hover:bg-[#32333c] px-3 py-2 rounded-lg bg-[#3E3F4B] font-light tracking-tight"
+                      className=" mb-2 w-full md:w-52 text-sm shadow-lg  transition duration-300 ease-in-out hover:bg-[#32333c] px-3 py-2 rounded-lg bg-[#3E3F4B] font-light tracking-tight"
                     >
                       <span className="p-1 text-slate-300">{question}</span>
                     </div>
                   )
                 })}
               </div>
-              <div className="flex flex-col items-center col-start-3 row-start-2 gap-4 p-4 ">
-                <div className="flex flex-col items-center justify-center gap-2 w-52 ">
+              <div className="flex flex-col items-center justify-end col-start-1 row-start-3 gap-3 p-2 md:gap-4 md:p-4 h-fit md:h-full md:justify-center md:col-start-3 md:row-start-2 ">
+                <div className="flex flex-row items-center justify-center gap-2 md:flex-col w-52 ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-8 h-8 fill-current"
+                    className="w-6 h-6 fill-current md:w-8 md:h-8"
                     viewBox="0 0 512 512"
                   >
                     <title>Alert Circle</title>
@@ -172,7 +172,7 @@ export const GPT: React.FC = () => {
                     <div
                       onClick={() => setIsAsked((prevState) => !prevState)}
                       key={index}
-                      className=" mb-2 w-52 text-sm shadow-lg  transition duration-300 ease-in-out hover:bg-[#32333c] px-3 py-2 rounded-lg bg-[#3E3F4B] font-light tracking-tight"
+                      className=" mb-2 w-full md:w-52 text-sm shadow-lg  transition duration-300 ease-in-out hover:bg-[#32333c] px-3 py-2 rounded-lg bg-[#3E3F4B] font-light tracking-tight"
                     >
                       <span className="p-1 text-slate-300">{question}</span>
                     </div>
@@ -183,7 +183,7 @@ export const GPT: React.FC = () => {
           ) : (
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               key={"chat"}
               className="relative grid justify-center w-full h-[85%] max-w-3xl max-h-screen grid-cols-2 grid-rows-3 mt-8 overflow-y-auto text-center text-white scroll-p-4 "

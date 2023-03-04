@@ -2,17 +2,18 @@ export const projects = [
   {
     id: 1,
     title: "Binge Time",
-    overview: "Project 1 content goes here",
-    lesson: "lorem20asdasd  asda sdas dasd asdasddddddd gfsg fs asd s",
+    overview:
+      "As a TV series enthusiast and self-proclaimed binge watcher, I developed Binge Time to help people discover their next favorite TV show or movie. The app allows users to input their favorite TV show or movie and their country to check Netflix availability. It also displays the IMDb rating, plot and link to the selected TV show or movie.",
+    features: ["lorem20asdasd  asda sdas dasd asdasddddddd gfsg fs asd s"],
     tech: ["react", "next-js", "tailwind", "chatgpt"],
     image: "binge",
     links: ["", ""],
   },
   {
     id: 2,
-    title: "Blackjack Time",
+    title: "zkBlackjack",
     overview: "Project 1 content goes here",
-    lesson: "lorem20asdasd  asda sdas dasd asdasddddddd gfsg fs asd s",
+    features: ["lorem20asdasd  asda sdas dasd asdasddddddd gfsg fs asd s"],
     tech: [
       "react",
       "next-js",
@@ -28,9 +29,9 @@ export const projects = [
   },
   {
     id: 3,
-    title: "Fautor Time",
+    title: "Fautor",
     overview: "Project 1 content goes here",
-    lesson: "lorem20asdasd  asda sdas dasd asdasddddddd gfsg fs asd s",
+    features: ["lorem20asdasd  asda sdas dasd asdasddddddd gfsg fs asd s"],
     tech: [
       "react",
       "next-js",
