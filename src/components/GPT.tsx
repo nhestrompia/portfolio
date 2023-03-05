@@ -2,14 +2,20 @@ import { AnimatePresence, motion } from "framer-motion"
 import React, { useEffect, useState } from "react"
 import Typewriter from "typewriter-effect"
 import { ANSWERS } from "../utils/answers"
+import { Message } from "./Message"
+
+interface MessageData {
+  sender: string
+  text: string
+}
 
 export const GPT: React.FC = () => {
   const [value, setValue] = useState("")
-  const [question, setQuestion] = useState(
-    "What inspired you to become a developer?"
-  )
+  // const [question, setQuestion] = useState(
+  //   "What inspired you to become a developer?"
+  // )
   const [isAsked, setIsAsked] = useState(false)
-  const [answer, setAnswer] = useState("")
+  const [messages, setMessages] = useState<MessageData[]>([])
 
   const questions = [
     `"What inspired you to become a developer?"`,
@@ -42,11 +48,25 @@ export const GPT: React.FC = () => {
   }
 
   const answerQuestion = () => {
-    const structuredAnswer = ANSWERS[0].split(" ")
+    const structuredAnswer = ANSWERS[0]
+    setMessages((prevState: MessageData[]) => [
+      ...prevState,
+      {
+        sender: "Umut",
+        text: structuredAnswer,
+      },
+    ])
   }
 
   const handleSubmit = () => {
     setIsAsked((prevState) => !prevState)
+    setMessages((prevState: MessageData[]) => [
+      ...prevState,
+      {
+        sender: "Visitor",
+        text: value,
+      },
+    ])
     setValue("")
   }
 
@@ -189,105 +209,15 @@ export const GPT: React.FC = () => {
               className="relative grid justify-center w-full h-[85%] max-w-3xl max-h-screen grid-cols-2 grid-rows-3 mt-8 overflow-y-auto text-center text-white scroll-p-4 "
             >
               <div className="relative min-w-full col-span-2 col-start-1 row-start-1 gap-4 text-center text-white ">
-                <div className="flex w-full gap-2 px-2 py-4 gap- bg-slate-600 h-fit">
-                  <h1 className="">Visitor</h1>
-                  <h1 className=""> {question}</h1>
-                </div>
-                <div
-                  onClick={() => setIsAsked((prevState) => !prevState)}
-                  className="flex gap-3 px-2 py-4 h-fit "
-                >
-                  <h1>Umut </h1>
-                  <h1 className="leading-7 tracking-tight text-start ">
-                    {/* <Typewriter
-                    options={{
-                      strings: ANSWERS[0],
-                      autoStart: true,
-                      delay: 40,
-                    }}
-                  /> */}{" "}
-                  </h1>
-                </div>
-                <div className="flex w-full gap-2 px-2 py-4 gap- bg-slate-600 h-fit">
-                  <h1>Visitor</h1>
-                  <h1 className=""> {question}</h1>
-                </div>
-                <div
-                  onClick={() => setIsAsked((prevState) => !prevState)}
-                  className="flex gap-3 px-2 py-4 h-fit "
-                >
-                  <h1>Umut </h1>
-                  <h1 className="leading-7 tracking-tight text-start ">
-                    {/* <Typewriter
-                    options={{
-                      strings: ANSWERS[0],
-                      autoStart: true,
-                      delay: 40,
-                    }}
-                  /> */}{" "}
-                    " Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cum similique voluptatum laudantium maxime, ab reiciendis
-                    dolore magnam cumque quam natus suscipit nulla reprehenderit
-                    illo voluptatibus eveniet optio eaque! Nulla iusto officiis
-                    laborum sit ducimus ex soluta at, amet, itaque tenetur modi,
-                    rem officia reprehenderit odit quam suscipit quos quisquam
-                    nam placeat? Laboriosam nulla aspernatur accusamus
-                    exercitationem cupiditate incidunt aliquam repudiandae quod
-                    repellendus, consequatur ",
-                  </h1>
-                </div>
-                <div
-                  onClick={() => setIsAsked((prevState) => !prevState)}
-                  className="flex gap-3 px-2 py-4 h-fit "
-                >
-                  <h1>Umut </h1>
-                  <h1 className="tracking-tight text-start ">
-                    {/* <Typewriter
-                    options={{
-                      strings: ANSWERS[0],
-                      autoStart: true,
-                      delay: 40,
-                    }}
-                  /> */}{" "}
-                    " Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cum similique voluptatum laudantium maxime, ab reiciendis
-                    dolore magnam cumque quam natus suscipit nulla reprehenderit
-                    illo voluptatibus eveniet optio eaque! Nulla iusto officiis
-                    laborum sit ducimus ex soluta at, amet, itaque tenetur modi,
-                    rem officia reprehenderit odit quam suscipit quos quisquam
-                    nam placeat? Laboriosam nulla aspernatur accusamus
-                    exercitationem cupiditate incidunt aliquam repudiandae quod
-                    repellendus, consequatur ",
-                  </h1>
-                </div>
-                <div className="flex w-full gap-2 px-2 py-4 gap- bg-slate-600 h-fit">
-                  <h1>Visitor</h1>
-                  <h1 className=""> {question}</h1>
-                </div>
-                <div
-                  onClick={() => setIsAsked((prevState) => !prevState)}
-                  className="flex gap-3 px-2 py-4 h-fit "
-                >
-                  <h1>Umut </h1>
-                  <h1 className="tracking-tight text-start ">
-                    {/* <Typewriter
-                    options={{
-                      strings: ANSWERS[0],
-                      autoStart: true,
-                      delay: 40,
-                    }}
-                  /> */}{" "}
-                    " Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cum similique voluptatum laudantium maxime, ab reiciendis
-                    dolore magnam cumque quam natus suscipit nulla reprehenderit
-                    illo voluptatibus eveniet optio eaque! Nulla iusto officiis
-                    laborum sit ducimus ex soluta at, amet, itaque tenetur modi,
-                    rem officia reprehenderit odit quam suscipit quos quisquam
-                    nam placeat? Laboriosam nulla aspernatur accusamus
-                    exercitationem cupiditate incidunt aliquam repudiandae quod
-                    repellendus, consequatur ",
-                  </h1>
-                </div>
+                {messages!.map((message, index) => {
+                  return (
+                    <Message
+                      key={index}
+                      sender={message!.sender}
+                      text={message!.text}
+                    />
+                  )
+                })}
               </div>
               {/* <div className="flex flex-col col-start-2 row-start-3 gap-4 text-center text-white snap-start">
               <div className="flex gap-2 px-2 py-4 border h-fit">
