@@ -9,6 +9,7 @@ interface IProps {
 
 export const Message: React.FC<IProps> = ({ text, sender }) => {
   if (sender === "Umut") {
+    // console.log("text", text)
     return (
       <div className="flex gap-4 px-2 py-4 h-fit ">
         <div className="flex flex-col items-center justify-center w-6 h-6">
@@ -21,12 +22,29 @@ export const Message: React.FC<IProps> = ({ text, sender }) => {
             alt="umut"
           />
         </div>
-        <h1 className="leading-7 tracking-tight text-start ">
+        <h1 id="message" className="leading-7 tracking-tight text-start ">
           <Typewriter
             options={{
               strings: text,
               autoStart: true,
-              delay: 20,
+              delay: 15,
+              // loop: false,
+              // cursorClassName: "type-cursor",
+            }}
+            onInit={(typewriter) => {
+              typewriter.callFunction(() => {
+                let cursor = document.querySelector(
+                  ".Typewriter__cursor"
+                ) as HTMLElement
+                // cursor!.classList.add(".type-cursor")
+                // const element = document.querySelector(
+                //   ".type-cursor"
+                // ) as HTMLElement
+
+                cursor!.style.display = "none"
+              })
+              // .start()
+              // .stop()
             }}
           />{" "}
           {/* " Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum
@@ -43,7 +61,7 @@ export const Message: React.FC<IProps> = ({ text, sender }) => {
   } else {
     return (
       <div className="flex items-center w-full gap-4 px-2 py-4 text-center rounded-md bg-slate-600 h-fit">
-        <div>
+        <div className="flex flex-col justify-center">
           <Image src={"/visitor.svg"} width={24} height={24} alt="visitor" />
         </div>
 

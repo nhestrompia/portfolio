@@ -30,3 +30,7 @@
   height: 3px;
   width: 3px;
 }
+
+.type-cursor {
+  display: none !important;
+}

@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion"
 import React, { useEffect, useState } from "react"
-import Typewriter from "typewriter-effect"
 import { ANSWERS } from "../utils/answers"
 import { Message } from "./Message"
 
@@ -20,6 +19,7 @@ export const GPT: React.FC = () => {
   const questions = [
     `"What inspired you to become a developer?"`,
     // `"What are you working on right now?"`,
+    // `"What programming languages and frameworks are you most comfortable with"`,
     `"What is your tech stack currently?"`,
     `"What are your interests besides coding?"`,
   ]
@@ -43,12 +43,41 @@ export const GPT: React.FC = () => {
   const handleClick = (index: number) => {
     const newQuestion = questions[index].replaceAll(`"`, ``)
     setValue(newQuestion)
-
-    return <Typewriter />
   }
 
   const answerQuestion = () => {
-    const structuredAnswer = ANSWERS[0]
+    const currentQuestion = messages[messages.length - 1]
+    console.log(
+      "🚀 ~ file: GPT.tsx:50 ~ answerQuestion ~ currentQuestion:",
+      currentQuestion
+    )
+    let structuredAnswer: string
+
+    switch (true) {
+      case currentQuestion.text.includes("inspired"):
+        structuredAnswer = ANSWERS[0]
+
+        break
+      case currentQuestion.text.includes("tech"):
+        structuredAnswer = ANSWERS[1]
+
+        break
+      case currentQuestion.text.includes("interest"):
+        structuredAnswer = ANSWERS[2]
+
+        "I can answer questions, provide information, and even tell jokes!"
+        break
+      case currentQuestion.text.includes("interest"):
+        structuredAnswer = ANSWERS[2]
+
+        "I can answer questions, provide information, and even tell jokes!"
+        break
+      default:
+        // structuredAnswer = ANSWERS[0]
+
+        "I'm sorry, I didn't understand your question. Could you please rephrase it?"
+        break
+    }
     setMessages((prevState: MessageData[]) => [
       ...prevState,
       {
@@ -59,7 +88,9 @@ export const GPT: React.FC = () => {
   }
 
   const handleSubmit = () => {
-    setIsAsked((prevState) => !prevState)
+    if (messages.length === 0) {
+      setIsAsked((prevState) => !prevState)
+    }
     setMessages((prevState: MessageData[]) => [
       ...prevState,
       {
@@ -190,7 +221,6 @@ export const GPT: React.FC = () => {
                 {limitations.map((question, index) => {
                   return (
                     <div
-                      onClick={() => setIsAsked((prevState) => !prevState)}
                       key={index}
                       className=" mb-2 w-full md:w-52 text-sm shadow-lg  transition duration-300 ease-in-out hover:bg-[#32333c] px-3 py-2 rounded-lg bg-[#3E3F4B] font-light tracking-tight"
                     >
