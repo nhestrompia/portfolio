@@ -70,7 +70,7 @@ export const Header: React.FC = () => {
           Ask me anything!
         </h1>
         <p className="w-64 mb-8 text-lg tracking-tighter text-center md:text-xl md:w-full opacity-40">
-          Type your question below and I'll try to answer it.
+          Type your question below and I&apos;ll try to answer it.
         </p>
       </div>
     </div>
