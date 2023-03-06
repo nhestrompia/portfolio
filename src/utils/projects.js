@@ -39,7 +39,10 @@ export const projects = [
       "Hardhat",
     ],
     image: "zkblackjack",
-    links: ["", ""],
+    links: [
+      "https://zkblackjack.vercel.app",
+      "https://github.com/nhestrompia/zkBlackjack",
+    ],
   },
   {
     id: 3,
@@ -62,7 +65,10 @@ export const projects = [
       "Hardhat",
     ],
     image: "fautor",
-    links: ["", ""],
+    links: [
+      "https://fautor.vercel.app",
+      "https://github.com/nhestrompia/fautor",
+    ],
   },
   ,
 ]

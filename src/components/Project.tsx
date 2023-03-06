@@ -47,6 +47,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
         <div className="flex flex-col w-full row-start-1 mx-auto">
           <div className="flex items-center content-center justify-center w-full row-start-1 mt-10 ">
             <Image
+              priority
               src={`/${projects.image}.png`}
               width={860}
               height={600}
@@ -60,12 +61,14 @@ export const Project: React.FC<IProps> = ({ projects }) => {
             <div className="flex items-center gap-4">
               <a
                 href={projects.links[0]}
+                target="_blank"
                 className="inline-flex items-center justify-center w-full px-4 py-2 text-sm tracking-wide text-center text-white duration-200 bg-black border-2 border-black md:text-base md:px-6 dark:text-black dark:hover:bg-black dark:hover:text-white dark:bg-white hover:bg-transparent hover:border-black rounded-xl hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black focus-visible:ring-black"
               >
                 Live Demo
               </a>
               <a
                 href={projects.links[1]}
+                target="_blank"
                 className="inline-flex items-center justify-center w-full px-4 py-2 text-sm tracking-wide text-center text-white duration-200 bg-black border-2 border-black md:text-base md:px-6 whitespace-nowrap dark:text-black dark:hover:bg-black dark:hover:text-white dark:bg-white hover:bg-transparent hover:border-black rounded-xl hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black focus-visible:ring-black"
               >
                 Source Code
@@ -131,6 +134,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
                         <Image
                           key={index}
                           src={`${item}.svg`}
+                          priority
                           className=""
                           width={item === "Solidity" ? 16 : 36}
                           height={item === "Solidity" ? 16 : 36}

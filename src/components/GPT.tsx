@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { ANSWERS } from "../utils/answers"
 import { Message } from "./Message"
 
 interface MessageData {
   sender: string
-  text: string
+  text: string[]
 }
 
 export const GPT: React.FC = () => {
@@ -15,6 +15,7 @@ export const GPT: React.FC = () => {
   // )
   const [isAsked, setIsAsked] = useState(false)
   const [messages, setMessages] = useState<MessageData[]>([])
+  const chatRef = useRef<HTMLDivElement>(null)
 
   const questions = [
     `"What inspired you to become a developer?"`,
@@ -45,67 +46,80 @@ export const GPT: React.FC = () => {
     setValue(newQuestion)
   }
 
+  const scrollToBottom = () => {
+    console.log("reff", chatRef.current)
+    chatRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
   const answerQuestion = () => {
-    const currentQuestion = messages[messages.length - 1]
-    console.log(
-      "🚀 ~ file: GPT.tsx:50 ~ answerQuestion ~ currentQuestion:",
-      currentQuestion
-    )
-    let structuredAnswer: string
+    if (messages[messages.length - 1].sender === "Visitor") {
+      const currentQuestion = messages[messages.length - 1].text[0]
+      console.log("current", currentQuestion)
+      let structuredAnswer: string[]
 
-    switch (true) {
-      case currentQuestion.text.includes("inspired"):
-        structuredAnswer = ANSWERS[0]
+      switch (true) {
+        case currentQuestion.includes("inspired"):
+          structuredAnswer = ANSWERS[0]
 
-        break
-      case currentQuestion.text.includes("tech"):
-        structuredAnswer = ANSWERS[1]
+          break
+        case currentQuestion.includes("tech"):
+          structuredAnswer = ANSWERS[1]
 
-        break
-      case currentQuestion.text.includes("interest"):
-        structuredAnswer = ANSWERS[2]
+          break
+        case currentQuestion.includes("interest"):
+          structuredAnswer = ANSWERS[2]
 
-        "I can answer questions, provide information, and even tell jokes!"
-        break
-      case currentQuestion.text.includes("interest"):
-        structuredAnswer = ANSWERS[2]
+          "I can answer questions, provide information, and even tell jokes!"
+          break
+        case currentQuestion.includes("interest"):
+          structuredAnswer = ANSWERS[2]
 
-        "I can answer questions, provide information, and even tell jokes!"
-        break
-      default:
-        // structuredAnswer = ANSWERS[0]
+          "I can answer questions, provide information, and even tell jokes!"
+          break
+        default:
+          // structuredAnswer = ANSWERS[0]
 
-        "I'm sorry, I didn't understand your question. Could you please rephrase it?"
-        break
+          "I'm sorry, I didn't understand your question. Could you please rephrase it?"
+          break
+      }
+      setMessages((prevState: MessageData[]) => [
+        ...prevState,
+        {
+          sender: "Umut",
+          text: structuredAnswer,
+        },
+      ])
     }
-    setMessages((prevState: MessageData[]) => [
-      ...prevState,
-      {
-        sender: "Umut",
-        text: structuredAnswer,
-      },
-    ])
+  }
+
+  const resetChat = () => {
+    setMessages([])
+    setIsAsked(false)
   }
 
   const handleSubmit = () => {
-    if (messages.length === 0) {
-      setIsAsked((prevState) => !prevState)
+    if (value.length > 0) {
+      if (messages.length === 0) {
+        setIsAsked((prevState) => !prevState)
+      }
+      const newValue = value
+      console.log("new value", [newValue])
+      setMessages((prevState: MessageData[]) => [
+        ...prevState,
+        {
+          sender: "Visitor",
+          text: [newValue],
+        },
+      ])
+      setValue("")
     }
-    setMessages((prevState: MessageData[]) => [
-      ...prevState,
-      {
-        sender: "Visitor",
-        text: value,
-      },
-    ])
-    setValue("")
   }
 
   useEffect(() => {
     if (isAsked) {
       answerQuestion()
     }
-  }, [isAsked])
+  }, [messages])
 
   return (
     <div className="flex items-center justify-center h-screen min-w-full overflow-hidden bg-gray-800 snap-start">
@@ -235,6 +249,7 @@ export const GPT: React.FC = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              ref={chatRef}
               key={"chat"}
               className="relative grid justify-center w-full h-[85%] max-w-3xl max-h-screen grid-cols-2 grid-rows-3 mt-8 overflow-y-auto text-center text-white scroll-p-4 "
             >
@@ -243,39 +258,54 @@ export const GPT: React.FC = () => {
                   return (
                     <Message
                       key={index}
+                      textIndex={index}
                       sender={message!.sender}
                       text={message!.text}
+                      resetChat={resetChat}
                     />
                   )
                 })}
               </div>
-              {/* <div className="flex flex-col col-start-2 row-start-3 gap-4 text-center text-white snap-start">
-              <div className="flex gap-2 px-2 py-4 border h-fit">
-                <h1>Visitor - </h1>
-                <h1> {question}</h1>
-              </div>
-              <div className="flex gap-2 px-2 py-4 border h-fit ">
-                <h1>Umut - </h1>
-                <h1 className="tracking-tight ">
-                  <Typewriter
-                options={{
-                  strings: ANSWERS[0],
-                  autoStart: true,
-                  delay: 40,
-                }}
-              />
-                </h1>
-              </div>
-            </div> */}
+              <div className="mt-auto" ref={chatRef}></div>
             </motion.div>
           )}
         </AnimatePresence>
-
+        {/* <button onClick={scrollToBottom}>asdasd</button> */}
         <div
           id="input"
           className={`absolute  flex flex-col justify-center w-full bottom-0 pb-3`}
         >
           <div className="flex items-center w-full py-2">
+            {/* {isAsked && (
+              <button
+                onClick={resetChat}
+                className="relative p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 right-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 fill-current"
+                  viewBox="0 0 512 512"
+                >
+                  <title>Refresh</title>
+                  <path
+                    d="M320 146s24.36-12-64-12a160 160 0 10160 160"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="32"
+                  />
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="32"
+                    d="M256 58l80 80-80 80"
+                  />
+                </svg>
+              </button>
+            )} */}
             <input
               className=" rounded-lg shadow-lg w-full max-w-2xl  placeholder:text-sm text-sm placeholder:tracking-tight shrink-0  px-3.5 py-3  bg-[#40414F] min-w-full  text-white leading-tight focus:outline-none"
               id="search"
@@ -291,6 +321,7 @@ export const GPT: React.FC = () => {
             >
               Ask
             </button> */}
+
             <button
               onClick={handleSubmit}
               className="relative p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 -left-10"
