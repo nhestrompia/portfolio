@@ -133,7 +133,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
                       <div className="flex items-center justify-center w-8 h-8 ">
                         <Image
                           key={index}
-                          src={`${item}.svg`}
+                          src={`/${item}.svg`}
                           priority
                           className=""
                           width={item === "Solidity" ? 16 : 36}

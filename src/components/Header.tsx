@@ -3,7 +3,7 @@ import { ThemeToggle } from "./Theme"
 
 export const Header: React.FC = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen px-8 py-16 mx-auto snap-start max-w-7xl lg:px-16 md:px-12 lg:py-24">
+    <div className="relative flex flex-col items-center justify-center h-screen px-8 py-16 mx-auto snap-normal snap-start max-w-7xl lg:px-16 md:px-12 lg:py-24">
       <nav className="absolute flex items-end justify-end w-full mr-8 top-6">
         <ThemeToggle />
       </nav>
@@ -22,6 +22,7 @@ export const Header: React.FC = () => {
           <a
             className="p-1 -m-1 text-black transition fill-current group dark:text-white"
             aria-label="Follow on Twitter"
+            target="_blank"
             href="https://twitter.com/nhestrompia"
           >
             <svg
@@ -37,6 +38,7 @@ export const Header: React.FC = () => {
           <a
             className="p-1 -m-1 text-black transition fill-current group dark:text-white"
             aria-label="Follow on GitHub"
+            target="_blank"
             href="https://github.com/nhestrompia"
           >
             <svg

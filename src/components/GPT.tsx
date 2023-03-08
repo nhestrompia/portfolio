@@ -15,6 +15,8 @@ export const GPT: React.FC = () => {
   // )
   const [isAsked, setIsAsked] = useState(false)
   const [messages, setMessages] = useState<MessageData[]>([])
+  const [isScrollable, setIsScrollable] = useState(false)
+  const [isTyping, setIsTyping] = useState(false)
   const chatRef = useRef<HTMLDivElement>(null)
 
   const questions = [
@@ -48,7 +50,12 @@ export const GPT: React.FC = () => {
 
   const scrollToBottom = () => {
     console.log("reff", chatRef.current)
-    chatRef.current?.scrollIntoView({ behavior: "smooth" })
+    // chatRef.current?.scrollIntoView({ behavior: "smooth" })
+    chatRef.current?.scrollTo({
+      top: chatRef.current.scrollHeight,
+      behavior: "smooth",
+    })
+    setIsScrollable(false)
   }
 
   const answerQuestion = () => {
@@ -56,7 +63,7 @@ export const GPT: React.FC = () => {
       const currentQuestion = messages[messages.length - 1].text[0]
       console.log("current", currentQuestion)
       let structuredAnswer: string[]
-
+      // setIsTyping(true)
       switch (true) {
         case currentQuestion.includes("inspired"):
           structuredAnswer = ANSWERS[0]
@@ -89,12 +96,16 @@ export const GPT: React.FC = () => {
           text: structuredAnswer,
         },
       ])
+      setIsTyping(true)
     }
   }
 
   const resetChat = () => {
+    console.log("scrollable reset", isScrollable)
     setMessages([])
     setIsAsked(false)
+    setIsScrollable(!isScrollable)
+    setIsTyping(false)
   }
 
   const handleSubmit = () => {
@@ -115,14 +126,66 @@ export const GPT: React.FC = () => {
     }
   }
 
+  const handleScroll = () => {
+    if (chatRef.current && isAsked) {
+      const isAtBottom =
+        chatRef.current.scrollTop + chatRef.current.clientHeight >=
+        chatRef.current.scrollHeight
+
+      if (isAtBottom) {
+        setIsScrollable(false)
+      } else {
+        setIsScrollable(true)
+      }
+    }
+  }
+
   useEffect(() => {
     if (isAsked) {
       answerQuestion()
     }
+    handleScroll()
   }, [messages])
 
+  // useEffect(() => {
+  //   if (chatRef.current) {
+  //     const hasOverflow =
+  //       chatRef.current!.scrollHeight > chatRef.current!.clientHeight
+
+  //     console.log("isScrollable:", isScrollable)
+  //     if (hasOverflow) {
+  //       setIsScrollable(true)
+  //     } else {
+  //       console.log("false asda sd")
+
+  //       setIsScrollable(false)
+  //     }
+
+  //     chatRef.current?.addEventListener("scroll", handleScroll)
+
+  //     return () => {
+  //       chatRef.current?.removeEventListener("scroll", handleScroll)
+  //     }
+  //   }
+  // }, [messages])
+
+  useEffect(() => {
+    if (chatRef.current && isAsked) {
+      const hasOverflow =
+        chatRef.current.scrollHeight > chatRef.current.clientHeight
+
+      setIsScrollable(hasOverflow)
+
+      chatRef.current.addEventListener("scroll", handleScroll)
+
+      return () => {
+        chatRef.current!.removeEventListener("scroll", handleScroll)
+      }
+    }
+  }, [messages, isTyping])
+
   return (
-    <div className="flex items-center justify-center h-screen min-w-full overflow-hidden bg-gray-800 snap-start">
+    <div className="flex items-center justify-center h-screen min-w-full overflow-hidden bg-gray-800 snap-normal snap-start ">
       <div
         className={` container h-full max-h-screen max-w-3xl  overflow-hidden text-center relative text-white min-w-fit`}
       >
@@ -251,63 +314,59 @@ export const GPT: React.FC = () => {
               exit={{ opacity: 0 }}
               ref={chatRef}
               key={"chat"}
-              className="relative grid justify-center w-full h-[85%] max-w-3xl max-h-screen grid-cols-2 grid-rows-3 mt-8 overflow-y-auto text-center text-white scroll-p-4 "
+              className="relative grid justify-center w-full h-[85%] scroll-smooth max-w-3xl max-h-screen grid-cols-2 grid-rows-3 mt-8 overflow-y-auto text-center text-white scroll-p-4 "
             >
-              <div className="relative min-w-full col-span-2 col-start-1 row-start-1 gap-4 text-center text-white ">
-                {messages!.map((message, index) => {
-                  return (
-                    <Message
-                      key={index}
-                      textIndex={index}
-                      sender={message!.sender}
-                      text={message!.text}
-                      resetChat={resetChat}
-                    />
-                  )
-                })}
+              <div className="relative flex flex-col min-w-full col-span-2 col-start-1 row-start-1 gap-4 text-center text-white ">
+                <div className="relative min-w-full gap-4 text-center text-white ">
+                  {messages!.map((message, index) => {
+                    return (
+                      <Message
+                        key={index}
+                        textIndex={index}
+                        sender={message!.sender}
+                        text={message!.text}
+                        resetChat={resetChat}
+                        setIsTyping={setIsTyping}
+                      />
+                    )
+                  })}
+                </div>
               </div>
-              <div className="mt-auto" ref={chatRef}></div>
             </motion.div>
           )}
         </AnimatePresence>
-        {/* <button onClick={scrollToBottom}>asdasd</button> */}
+        {isScrollable && (
+          <motion.button
+            initial={{ opacity: 1 }}
+            whileTap={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="absolute bg-[#40414f] p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 z-10 flex justify-center right-4 bottom-24"
+            onClick={scrollToBottom}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 fill-current"
+              viewBox="0 0 512 512"
+            >
+              <title>Scroll Down</title>
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="48"
+                d="M112 268l144 144 144-144M256 392V100"
+              />
+            </svg>
+          </motion.button>
+        )}
         <div
           id="input"
-          className={`absolute  flex flex-col justify-center w-full bottom-0 pb-3`}
+          className={`absolute  flex flex-col justify-center w-full  bottom-0 pb-3`}
         >
-          <div className="flex items-center w-full py-2">
-            {/* {isAsked && (
-              <button
-                onClick={resetChat}
-                className="relative p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 right-2"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 fill-current"
-                  viewBox="0 0 512 512"
-                >
-                  <title>Refresh</title>
-                  <path
-                    d="M320 146s24.36-12-64-12a160 160 0 10160 160"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeMiterlimit="10"
-                    strokeWidth="32"
-                  />
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="32"
-                    d="M256 58l80 80-80 80"
-                  />
-                </svg>
-              </button>
-            )} */}
+          <div className="flex flex-row flex-grow items-center w-[90%] mx-auto md:w-full py-2">
             <input
-              className=" rounded-lg shadow-lg w-full max-w-2xl  placeholder:text-sm text-sm placeholder:tracking-tight shrink-0  px-3.5 py-3  bg-[#40414F] min-w-full  text-white leading-tight focus:outline-none"
+              className=" rounded-lg flex-grow shadow-lg  w-full pr-10 md:pr-16 pl-3.5 placeholder:text-sm text-sm placeholder:tracking-tight  shrink-0   py-3  bg-[#40414F]  text-white leading-tight focus:outline-none"
               id="search"
               type="text"
               value={value}
@@ -315,19 +374,13 @@ export const GPT: React.FC = () => {
               required
               placeholder="Ask me anything"
             />
-            {/* <button
-              className="bg-[#1F2937] hover:bg-[#2f3e53] text-white font-bold py-2 px-4 rounded"
-              id="search-btn"
-            >
-              Ask
-            </button> */}
 
             <button
               onClick={handleSubmit}
-              className="relative p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 -left-10"
+              className=" p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 relative  -left-10 md:-left-12 "
             >
               <svg
-                className="w-6 h-6 fill-current "
+                className="w-4 h-4 fill-current md:w-6 md:h-6 "
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="fillCurrent"
@@ -337,9 +390,6 @@ export const GPT: React.FC = () => {
               </svg>
             </button>
           </div>
-          {/* <p className="relative mt-2 text-xs text-center text-gray-400">
-            Press Enter to submit your question
-          </p> */}
         </div>
       </div>
     </div>

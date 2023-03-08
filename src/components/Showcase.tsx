@@ -1,4 +1,3 @@
-import { motion } from "framer-motion"
 import React from "react"
 import { Pagination } from "swiper"
 import "swiper/css"
@@ -65,7 +64,7 @@ export const Showcase: React.FC = () => {
           Projects
         </h1>
       </motion.div> */}
-      <div className="absolute z-10 overflow-hidden">
+      {/* <div className="absolute z-10 overflow-hidden">
         <div className="relative z-10 inline-block overflow-hidden">
           <motion.span
             className="absolute inline-block whitespace-nowrap"
@@ -85,7 +84,7 @@ export const Showcase: React.FC = () => {
             Projects
           </motion.span>
         </div>
-      </div>
+      </div> */}
 
       <Swiper
         // mousewheel={{ thresholdDelta: 0.5 }}

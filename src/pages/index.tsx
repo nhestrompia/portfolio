@@ -15,7 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="w-screen  dark:bg-[#244c53] h-screen overflow-x-hidden overflow-y-scroll scroll-smooth snap-y snap-mandatory">
+      <main className="w-screen  dark:bg-[#244c53] h-screen overflow-x-hidden overflow-y-scroll scroll-smooth snap-y snap-mandatory ">
         <Header />
         <GPT />
         <Showcase />

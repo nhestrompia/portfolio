@@ -7,6 +7,7 @@ interface IProps {
   sender: string
   textIndex: number
   resetChat: () => void
+  setIsTyping: (val: boolean) => void
 }
 
 export const Message: React.FC<IProps> = ({
@@ -14,6 +15,7 @@ export const Message: React.FC<IProps> = ({
   sender,
   textIndex,
   resetChat,
+  setIsTyping,
 }) => {
   if (sender === "Umut") {
     // console.log("text", text)
@@ -58,6 +60,9 @@ export const Message: React.FC<IProps> = ({
 
                   cursor!.style.display = "none"
                 })
+                .callFunction(() => {
+                  setIsTyping(false)
+                })
                 .start()
               // .stop()
             }}
@@ -75,7 +80,7 @@ export const Message: React.FC<IProps> = ({
     )
   } else {
     return (
-      <div className="flex items-center w-full gap-4 px-2 py-4 text-center rounded-md bg-slate-600 h-fit">
+      <div className="relative flex items-center w-full gap-4 px-2 py-4 text-center rounded-md bg-slate-600 h-fit">
         <div className="flex flex-col justify-center">
           <Image src={"/visitor.svg"} width={24} height={24} alt="visitor" />
         </div>
@@ -84,7 +89,7 @@ export const Message: React.FC<IProps> = ({
         {textIndex === 0 && (
           <button
             onClick={resetChat}
-            className="relative p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 left-[46%]"
+            className="absolute p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 right-0 mx-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
