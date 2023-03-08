@@ -132,7 +132,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
                     >
                       <div className="flex items-center justify-center w-8 h-8 ">
                         <img
-                          key={crypto.randomUUID()}
+                          key={index}
                           src={`/${item}.svg`}
                           className="w-8 h-8"
                           width={item === "Solidity" ? 16 : 36}
