@@ -131,10 +131,10 @@ export const Project: React.FC<IProps> = ({ projects }) => {
                       className="flex flex-col items-center justify-center gap-2"
                     >
                       <div className="flex items-center justify-center w-8 h-8 ">
-                        <img
+                        <Image
                           key={index}
                           src={`/${item}.svg`}
-                          className=""
+                          className="w-8 h-8"
                           width={item === "Solidity" ? 16 : 36}
                           height={item === "Solidity" ? 16 : 36}
                           alt={item}
