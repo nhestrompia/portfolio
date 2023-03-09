@@ -1,6 +1,7 @@
 import React from "react"
 import { Pagination } from "swiper"
 import "swiper/css"
+// import "swiper/css/effect-cube"
 import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
 
@@ -49,7 +50,7 @@ export const Showcase: React.FC = () => {
   }
 
   return (
-    <div className="relative h-screen snap-start">
+    <div className="h-screen overflow-y-auto smooth-scroll snap-start">
       {/* // initial={{ opacity: 1 }}
       // viewport={{ once: true }}
       // whileInView={{ opacity: 0 }}
@@ -88,8 +89,10 @@ export const Showcase: React.FC = () => {
 
       <Swiper
         // mousewheel={{ thresholdDelta: 0.5 }}
+        className="h-full min-h-full"
         pagination={true}
         modules={[Pagination]}
+        // effect="cube"
       >
         {projects.map((project) => {
           return (

@@ -59,7 +59,7 @@ export const GPT: React.FC = () => {
   }
 
   const answerQuestion = () => {
-    if (messages[messages.length - 1].sender === "Visitor") {
+    if (messages[messages.length - 1].sender === "Visitor" && !isTyping) {
       const currentQuestion = messages[messages.length - 1].text[0]
       console.log("current", currentQuestion)
       let structuredAnswer: string[]
@@ -109,7 +109,7 @@ export const GPT: React.FC = () => {
   }
 
   const handleSubmit = () => {
-    if (value.length > 0) {
+    if (value.length > 0 && !isTyping) {
       if (messages.length === 0) {
         setIsAsked((prevState) => !prevState)
       }
@@ -185,9 +185,11 @@ export const GPT: React.FC = () => {
   }, [messages, isTyping])
 
   return (
-    <div className="flex items-center justify-center h-screen min-w-full overflow-hidden bg-gray-800 snap-normal snap-start ">
+    <div className="flex items-center justify-center h-full min-w-full bg-gray-800 lg:overflow-hidden lg:h-screen snap-normal snap-start ">
       <div
-        className={` container h-full max-h-screen max-w-3xl  overflow-hidden text-center relative text-white min-w-fit`}
+        className={` container h-full max-h-screen max-w-3xl ${
+          isAsked ? "" : "overflow-y-auto"
+        }  md:overflow-hidden text-center relative text-white min-w-fit`}
       >
         {/* <div className="relative flex flex-col items-center justify-center col-start-2 row-start-1 gap-2 top-24">
           <h1 className="mt-4 text-4xl font-bold tracking-tighter ">
@@ -205,7 +207,7 @@ export const GPT: React.FC = () => {
               whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               key="info"
-              className="relative grid items-center justify-center grid-cols-1 grid-rows-3 mx-auto overflow-y-hidden text-center text-white h-fit md:h-full md:grid-cols-3 top-4 md:bottom-16 max-w-fit"
+              className="relative grid items-center justify-center h-full grid-cols-1 grid-rows-3 mx-auto text-center text-white md:gap-0 lg:overflow-y-hidden md:h-full md:grid-cols-3 md:bottom-16 max-w-fit"
             >
               <div className="flex flex-col items-center justify-end col-start-1 row-start-1 gap-3 p-2 md:gap-4 md:p-4 h-fit md:h-full md:justify-center md:row-start-2 ">
                 <div className="flex flex-row items-center justify-center gap-2 md:flex-col w-52 ">
@@ -314,7 +316,7 @@ export const GPT: React.FC = () => {
               exit={{ opacity: 0 }}
               ref={chatRef}
               key={"chat"}
-              className="relative grid justify-center w-full h-[85%] scroll-smooth max-w-3xl max-h-screen grid-cols-2 grid-rows-3 mt-8 overflow-y-auto text-center text-white scroll-p-4 "
+              className="relative grid justify-center w-full h-[85%] scroll-smooth max-w-3xl max-h-screen grid-cols-2 grid-rows-3 mt-8 overflow-y-auto text-center text-white  md:scroll-p-4 "
             >
               <div className="relative flex flex-col min-w-full col-span-2 col-start-1 row-start-1 gap-4 text-center text-white ">
                 <div className="relative min-w-full gap-4 text-center text-white ">
@@ -362,9 +364,11 @@ export const GPT: React.FC = () => {
         )}
         <div
           id="input"
-          className={`absolute  flex flex-col justify-center w-full  bottom-0 pb-3`}
+          className={`absolute flex flex-col justify-center w-full ${
+            isAsked ? "" : "-bottom-24"
+          }  md:bottom-0 pb-3`}
         >
-          <div className="flex flex-row flex-grow items-center w-[90%] mx-auto md:w-full py-2">
+          <div className="flex flex-row flex-grow items-center w-[90%] mx-auto lg:w-full py-2">
             <input
               className=" rounded-lg flex-grow shadow-lg  w-full pr-10 md:pr-16 pl-3.5 placeholder:text-sm text-sm placeholder:tracking-tight  shrink-0   py-3  bg-[#40414F]  text-white leading-tight focus:outline-none"
               id="search"
@@ -375,20 +379,30 @@ export const GPT: React.FC = () => {
               placeholder="Ask me anything"
             />
 
-            <button
-              onClick={handleSubmit}
-              className=" p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 relative  -left-10 md:-left-12 "
-            >
-              <svg
-                className="w-4 h-4 fill-current md:w-6 md:h-6 "
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="fillCurrent"
+            {isTyping ? (
+              <div className="relative flex justify-center w-full -left-10 md:-left-12">
+                <span className="inline-flex items-center gap-px">
+                  <span className="animate-blink mx-px h-1.5 w-1.5 rounded-full dark:bg-[#c3fcf2] bg-gray-500"></span>
+                  <span className="animate-blink animation-delay-200 mx-px h-1.5 w-1.5 rounded-full dark:bg-[#c3fcf2] bg-gray-500"></span>
+                  <span className="animate-blink animation-delay-400 mx-px h-1.5 w-1.5 rounded-full dark:bg-[#c3fcf2] bg-gray-500"></span>
+                </span>
+              </div>
+            ) : (
+              <button
+                onClick={handleSubmit}
+                className=" p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 relative  -left-10 md:-left-12 "
               >
-                <path d="M0 0h24v24H0z" fill="none" />
-                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-              </svg>
-            </button>
+                <svg
+                  className="w-4 h-4 fill-current md:w-6 md:h-6 "
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="fillCurrent"
+                >
+                  <path d="M0 0h24v24H0z" fill="none" />
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       </div>

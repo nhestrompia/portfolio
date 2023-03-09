@@ -85,11 +85,14 @@ export const Message: React.FC<IProps> = ({
           <Image src={"/visitor.svg"} width={24} height={24} alt="visitor" />
         </div>
 
-        <h1 className="leading-7 tracking-tight text-start"> {text}</h1>
+        <h1 className="text-sm leading-7 tracking-tight md:text-base text-start">
+          {" "}
+          {text}
+        </h1>
         {textIndex === 0 && (
           <button
             onClick={resetChat}
-            className="absolute p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 right-0 mx-4"
+            className="absolute p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 -right-2 md:right-0 mx-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
