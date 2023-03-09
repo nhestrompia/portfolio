@@ -3,7 +3,7 @@ import { ThemeToggle } from "./Theme"
 
 export const Header: React.FC = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen px-8 py-16 mx-auto overflow-hidden snap-normal snap-start max-w-7xl lg:px-16 md:px-12 lg:py-24">
+    <div className="relative flex flex-col items-center justify-center h-screen px-8 py-16 mx-auto overflow-y-clip snap-normal snap-start max-w-7xl lg:px-16 md:px-12 lg:py-24">
       <nav className="absolute flex items-end justify-end w-full mr-8 top-6">
         <ThemeToggle />
       </nav>

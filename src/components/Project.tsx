@@ -76,7 +76,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
             </div>
           </div>
         </div>
-        <div className="absolute flex flex-col justify-start w-full row-start-2 gap-6 mx-4 4k:col-start-2 md:gap-4 md:static lg:mt-10 4k:content-center ">
+        <div className="absolute flex flex-col justify-start w-full row-start-2 gap-2 mx-4 4k:col-start-2 md:gap-4 md:static lg:mt-10 4k:content-center ">
           <h1 className="mx-2 text-3xl font-bold tracking-tighter 4k:text-5xl md:mx-4 md:text-4xl h-fit">
             {projects.title}
           </h1>
@@ -92,7 +92,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
             <div>
               {/* <h1 className="mb-2 text-xl font-semibold">Tech Stack</h1> */}
               <div className="flex gap-4 mt-2 ">
-                <div className="mt-4 w-[90%]">
+                <div className="md:mt-4 w-[90%]">
                   <h2 className="mx-2 text-xl font-semibold tracking-tighter 4k:text-3xl">
                     Features
                   </h2>
@@ -108,7 +108,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
                 </div>
               </div>
             </div>
-            <div className="relative py-4  border w-[90%] xl:w-full  rounded-lg xl:px-2 top-4 ">
+            <div className=" py-4 mb-16 md:mb-0 md:mt-8 border w-[90%] xl:w-full  rounded-lg xl:px-2  ">
               <h1 className="flex justify-center pb-4 text-lg font-semibold tracking-tighter text-center 4k:text-3xl md:text-xl">
                 Tech Stack
               </h1>
