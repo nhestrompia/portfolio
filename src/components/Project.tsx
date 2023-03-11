@@ -62,14 +62,14 @@ export const Project: React.FC<IProps> = ({ projects }) => {
               <a
                 href={projects.links[0]}
                 target="_blank"
-                className="inline-flex items-center justify-center w-full px-2.5 py-2 text-xs tracking-wide text-center text-white duration-200 bg-black border-2 border-black md:text-base md:px-6 dark:text-black dark:hover:bg-black dark:hover:text-white dark:bg-white hover:bg-transparent hover:border-black rounded-xl hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black focus-visible:ring-black"
+                className="inline-flex items-center justify-center w-full px-2.5 py-2 text-xs tracking-wide text-center text-white duration-200 bg-[#1b80bf] border-2 border-[#1b80bf] md:text-base md:px-6 dark:text-black dark:hover:bg-black dark:hover:text-white dark:bg-white hover:bg-transparent hover:border-[#1b80bf] rounded-xl hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black focus-visible:ring-black"
               >
                 Live Demo
               </a>
               <a
                 href={projects.links[1]}
                 target="_blank"
-                className="inline-flex items-center justify-center w-full px-2.5 py-2 text-xs tracking-wide text-center text-white duration-200 bg-black border-2 border-black md:text-base md:px-6 whitespace-nowrap dark:text-black dark:hover:bg-black dark:hover:text-white dark:bg-white hover:bg-transparent hover:border-black rounded-xl hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black focus-visible:ring-black"
+                className="inline-flex items-center justify-center w-full px-2.5 py-2 text-xs tracking-wide text-center text-white duration-200 bg-[#1b80bf] border-2 border-[#1b80bf] md:text-base md:px-6 whitespace-nowrap dark:text-black dark:hover:bg-black dark:hover:text-white dark:bg-white hover:bg-transparent hover:border-[#1b80bf] rounded-xl hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black focus-visible:ring-black"
               >
                 Source Code
               </a>
@@ -82,10 +82,10 @@ export const Project: React.FC<IProps> = ({ projects }) => {
           </h1>
           <div className="flex flex-col gap-3 md:mx-2">
             <div className="flex flex-col gap-2">
-              <h2 className="mx-2 text-lg font-semibold tracking-tighter 4k:text-3xl md:text-xl">
+              <h2 className="mx-2 text-lg font-semibold tracking-tighter text-black 4k:text-3xl md:text-xl">
                 Project Overview
               </h2>
-              <p className="mx-2  text-sm w-[90%] md:text-base">
+              <p className="mx-2  text-sm w-[90%] text-light-font md:text-base">
                 {projects.overview}
               </p>
             </div>
@@ -93,13 +93,13 @@ export const Project: React.FC<IProps> = ({ projects }) => {
               {/* <h1 className="mb-2 text-xl font-semibold">Tech Stack</h1> */}
               <div className="flex gap-4 mt-2 ">
                 <div className="md:mt-4 w-[90%]">
-                  <h2 className="mx-2 text-xl font-semibold tracking-tighter 4k:text-3xl">
+                  <h2 className="mx-2 text-xl font-semibold tracking-tighter text-black 4k:text-3xl">
                     Features
                   </h2>
                   <ul className="mx-2 space-y-2 text-sm list-disc md:text-base">
                     {projects.features.map((feature, index) => {
                       return (
-                        <li className="my-1" key={index}>
+                        <li className="my-1 text-light-font" key={index}>
                           {feature}
                         </li>
                       )
@@ -108,7 +108,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
                 </div>
               </div>
             </div>
-            <div className=" py-4 mb-16 md:mb-0 md:mt-8 border w-[90%] xl:w-full  rounded-lg xl:px-2  ">
+            <div className=" py-4 mb-16 md:mb-0 md:mt-6 border w-[90%] xl:w-full  rounded-lg xl:px-2  ">
               <h1 className="flex justify-center pb-4 text-lg font-semibold tracking-tighter text-center 4k:text-3xl md:text-xl">
                 Tech Stack
               </h1>

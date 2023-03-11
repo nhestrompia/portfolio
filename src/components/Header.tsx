@@ -3,24 +3,24 @@ import { ThemeToggle } from "./Theme"
 
 export const Header: React.FC = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen px-8 py-16 mx-auto overflow-y-clip snap-normal snap-start max-w-7xl lg:px-16 md:px-12 lg:py-24">
+    <div className="relative flex flex-col items-center justify-center h-screen px-8 py-16 bg-[#F4f4f6] mx-auto overflow-y-clip snap-normal snap-start max-w-7xl lg:px-16 md:px-12 lg:py-24">
       <nav className="absolute flex items-end justify-end w-full mr-8 top-6">
         <ThemeToggle />
       </nav>
 
       <div className="flex flex-col items-center justify-center w-full mt-8 text-center h-1/2 md:mt-4 lg:p-10">
         <div className="w-full mx-auto ">
-          <p className="mt-8 text-4xl tracking-tighter text-black md:text-5xl dark:text-white">
+          <p className="mt-8 text-4xl tracking-tighter text-light-font md:text-5xl dark:text-white">
             Hello I am Umut,
           </p>
-          <p className="max-w-xl mx-auto mt-4 text-lg tracking-tighter text-gray-600 dark:text-gray-400">
+          <p className="max-w-xl mx-auto mt-4 text-lg tracking-tighter text-light-font text-opacity-80 dark:text-gray-400">
             Front-end and smart contract developer
           </p>{" "}
         </div>
 
         <div className="flex justify-center gap-6 mt-6">
           <a
-            className="p-1 -m-1 text-black transition fill-current group dark:text-white"
+            className="p-1 -m-1 transition fill-current text-light-font group dark:text-white"
             aria-label="Follow on Twitter"
             target="_blank"
             href="https://twitter.com/nhestrompia"
@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
           </a>
 
           <a
-            className="p-1 -m-1 text-black transition fill-current group dark:text-white"
+            className="p-1 -m-1 transition fill-current text-light-font group dark:text-white"
             aria-label="Follow on GitHub"
             target="_blank"
             href="https://github.com/nhestrompia"
@@ -51,7 +51,7 @@ export const Header: React.FC = () => {
             </svg>
           </a>
           <a
-            className="p-1 -m-1 text-black transition fill-current group dark:text-white"
+            className="p-1 -m-1 transition fill-current text-light-font group dark:text-white"
             aria-label="Follow on GitHub"
             href="mailto:nhestrompia@gmail.com?subject=&body="
           >

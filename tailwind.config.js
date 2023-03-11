@@ -11,6 +11,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        "light-font": "#2a3843",
+      },
       screens: {
         "4k": "2260px",
         smd: "395px",

@@ -49,8 +49,6 @@ export const GPT: React.FC = () => {
   }
 
   const scrollToBottom = () => {
-    console.log("reff", chatRef.current)
-    // chatRef.current?.scrollIntoView({ behavior: "smooth" })
     chatRef.current?.scrollTo({
       top: chatRef.current.scrollHeight,
       behavior: "smooth",
@@ -61,7 +59,6 @@ export const GPT: React.FC = () => {
   const answerQuestion = () => {
     if (messages[messages.length - 1].sender === "Visitor" && !isTyping) {
       const currentQuestion = messages[messages.length - 1].text[0]
-      console.log("current", currentQuestion)
       let structuredAnswer: string[]
       // setIsTyping(true)
       switch (true) {
@@ -101,7 +98,6 @@ export const GPT: React.FC = () => {
   }
 
   const resetChat = () => {
-    console.log("scrollable reset", isScrollable)
     setMessages([])
     setIsAsked(false)
     setIsScrollable(!isScrollable)
@@ -114,7 +110,6 @@ export const GPT: React.FC = () => {
         setIsAsked((prevState) => !prevState)
       }
       const newValue = value
-      console.log("new value", [newValue])
       setMessages((prevState: MessageData[]) => [
         ...prevState,
         {
@@ -147,28 +142,6 @@ export const GPT: React.FC = () => {
     handleScroll()
   }, [messages])
 
-  // useEffect(() => {
-  //   if (chatRef.current) {
-  //     const hasOverflow =
-  //       chatRef.current!.scrollHeight > chatRef.current!.clientHeight
-
-  //     console.log("isScrollable:", isScrollable)
-  //     if (hasOverflow) {
-  //       setIsScrollable(true)
-  //     } else {
-  //       console.log("false asda sd")
-
-  //       setIsScrollable(false)
-  //     }
-
-  //     chatRef.current?.addEventListener("scroll", handleScroll)
-
-  //     return () => {
-  //       chatRef.current?.removeEventListener("scroll", handleScroll)
-  //     }
-  //   }
-  // }, [messages])
-
   useEffect(() => {
     if (chatRef.current && isAsked) {
       const hasOverflow =
@@ -185,7 +158,7 @@ export const GPT: React.FC = () => {
   }, [messages, isTyping])
 
   return (
-    <div className="flex items-center justify-center h-full min-w-full bg-gray-800 lg:overflow-hidden lg:h-screen snap-normal snap-start ">
+    <div className="flex items-center justify-center h-full min-w-full bg-[#152835] lg:overflow-hidden lg:h-screen snap-normal snap-start ">
       <div
         className={` container h-full max-h-screen max-w-3xl ${
           isAsked ? "" : "overflow-y-auto"
@@ -337,7 +310,7 @@ export const GPT: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence>
-        {isScrollable && (
+        {isScrollable && isAsked && (
           <motion.button
             initial={{ opacity: 1 }}
             whileTap={{ opacity: 0 }}

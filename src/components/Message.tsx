@@ -38,6 +38,7 @@ export const Message: React.FC<IProps> = ({
               autoStart: true,
               delay: 5,
               loop: false,
+              cursor: "",
 
               // cursorClassName: "type-cursor",
             }}
@@ -49,17 +50,17 @@ export const Message: React.FC<IProps> = ({
               })
 
               typewriter
-                .callFunction(() => {
-                  let cursor = document.querySelector(
-                    ".Typewriter__cursor"
-                  ) as HTMLElement
-                  // cursor!.classList.add(".type-cursor")
-                  // const element = document.querySelector(
-                  //   ".type-cursor"
-                  // ) as HTMLElement
+                // .callFunction(() => {
+                //   let cursor = document.querySelector(
+                //     ".Typewriter__cursor"
+                //   ) as HTMLElement
+                //   // cursor!.classList.add(".type-cursor")
+                //   // const element = document.querySelector(
+                //   //   ".type-cursor"
+                //   // ) as HTMLElement
 
-                  cursor!.style.display = "none"
-                })
+                //   cursor!.style.display = "none"
+                // })
                 .callFunction(() => {
                   setIsTyping(false)
                 })
