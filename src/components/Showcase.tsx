@@ -90,8 +90,13 @@ export const Showcase: React.FC = () => {
       <Swiper
         // mousewheel={{ thresholdDelta: 0.5 }}
         className="h-full min-h-full "
-        pagination={true}
+        pagination={{
+          bulletActiveClass: "active-bullet",
+          clickable: true,
+        }}
+        // style={{ backgroundColor: "#e54b4b" }}
         modules={[Pagination]}
+
         // effect="cube"
       >
         {projects.map((project) => {

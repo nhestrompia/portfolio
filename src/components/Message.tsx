@@ -20,7 +20,7 @@ export const Message: React.FC<IProps> = ({
   if (sender === "Umut") {
     // console.log("text", text)
     return (
-      <div className="flex gap-4 px-2 py-4 h-fit ">
+      <div className="flex gap-4 px-2 py-4 lg:px-3 h-fit ">
         <div className="flex flex-col items-center justify-center w-6 h-6">
           <Image
             src={"/umut.svg"}
@@ -81,7 +81,7 @@ export const Message: React.FC<IProps> = ({
     )
   } else {
     return (
-      <div className="relative flex items-center w-full gap-4 px-2 py-4 text-center rounded-md bg-slate-600 h-fit">
+      <div className="relative flex items-center w-full gap-4 px-2 lg:px-3 py-4 text-center rounded-md bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-fuchsia-500 via-blue-500 to-red-200 h-fit">
         <div className="flex flex-col justify-center">
           <Image src={"/visitor.svg"} width={24} height={24} alt="visitor" />
         </div>
@@ -93,7 +93,7 @@ export const Message: React.FC<IProps> = ({
         {textIndex === 0 && (
           <button
             onClick={resetChat}
-            className="absolute p-1.5 transition ease-in-out text-gray-200 duration-300 hover:text-[#1F2937]  rounded-lg shrink-0 hover:bg-gray-400 -right-2 md:right-0 mx-4"
+            className="absolute p-1.5 transition ease-in-out text-white duration-300  rounded-lg shrink-0 hover:bg-[#6340bc] -right-2 md:right-0 mx-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

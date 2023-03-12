@@ -16,17 +16,13 @@
 }
 
 ::-webkit-scrollbar-track {
-  /* Change the background color */
   background-color: #1f2937;
 }
 
-/* Select the scrollbar thumb */
 ::-webkit-scrollbar-thumb {
-  /* Change the background color */
   background-color: #f2f1ee;
   border-radius: 2px;
 
-  /* Change the size of the thumb */
   height: 3px;
   width: 3px;
 }
@@ -41,5 +37,29 @@
   }
   .animation-delay-400 {
     animation-delay: 0.4s;
+  }
+}
+
+@media (max-width: 991px) {
+  .swiper-pagination {
+    position: absolute !important;
+    /* padding-top: 1rem !important; */
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center;
+    bottom: 1rem !important; */
+  }
+}
+@media (prefers-color-scheme: light) {
+  .active-bullet {
+    opacity: 1 !important;
+    background: #da2626 !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .active-bullet {
+    opacity: 1 !important;
+    background: #f3e7e7 !important;
   }
 }

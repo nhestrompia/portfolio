@@ -21,8 +21,6 @@ export const GPT: React.FC = () => {
 
   const questions = [
     `"What inspired you to become a developer?"`,
-    // `"What are you working on right now?"`,
-    // `"What programming languages and frameworks are you most comfortable with"`,
     `"What is your tech stack currently?"`,
     `"What are your interests besides coding?"`,
   ]
@@ -56,6 +54,12 @@ export const GPT: React.FC = () => {
     setIsScrollable(false)
   }
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSubmit()
+    }
+  }
+
   const answerQuestion = () => {
     if (messages[messages.length - 1].sender === "Visitor" && !isTyping) {
       const currentQuestion = messages[messages.length - 1].text[0]
@@ -73,17 +77,23 @@ export const GPT: React.FC = () => {
         case currentQuestion.includes("interest"):
           structuredAnswer = ANSWERS[2]
 
-          "I can answer questions, provide information, and even tell jokes!"
           break
         case currentQuestion.includes("interest"):
           structuredAnswer = ANSWERS[2]
 
-          "I can answer questions, provide information, and even tell jokes!"
+          break
+        case currentQuestion.includes("contract"):
+          structuredAnswer = ANSWERS[3]
+          break
+        case currentQuestion.includes("anime"):
+          structuredAnswer = ANSWERS[4]
+          break
+        case currentQuestion.includes("music"):
+          structuredAnswer = ANSWERS[5]
           break
         default:
-          // structuredAnswer = ANSWERS[0]
+          structuredAnswer = ANSWERS[6]
 
-          "I'm sorry, I didn't understand your question. Could you please rephrase it?"
           break
       }
       setMessages((prevState: MessageData[]) => [
@@ -158,7 +168,7 @@ export const GPT: React.FC = () => {
   }, [messages, isTyping])
 
   return (
-    <div className="flex items-center justify-center h-full min-w-full bg-[#152835] lg:overflow-hidden lg:h-screen snap-normal snap-start ">
+    <div className="flex items-center justify-center h-full min-w-full bg-[#011627] lg:overflow-hidden lg:h-screen snap-normal snap-start ">
       <div
         className={` container h-full max-h-screen max-w-3xl ${
           isAsked ? "" : "overflow-y-auto"
@@ -343,17 +353,18 @@ export const GPT: React.FC = () => {
         >
           <div className="flex flex-row flex-grow items-center w-[90%] mx-auto lg:w-full py-2">
             <input
-              className=" rounded-lg flex-grow shadow-lg  w-full pr-10 md:pr-16 pl-3.5 placeholder:text-sm text-sm placeholder:tracking-tight  shrink-0   py-3  bg-[#40414F]  text-white leading-tight focus:outline-none"
+              className=" rounded-lg flex-grow shadow-lg  w-full pr-10 md:pr-16 pl-3.5 placeholder:text-sm text-sm placeholder:tracking-tight  shrink-0   py-3  bg-[#383944]  text-white leading-tight focus:outline-none"
               id="search"
               type="text"
               value={value}
               onChange={handleChange}
+              onKeyDown={handleKeyPress}
               required
               placeholder="Ask me anything"
             />
 
             {isTyping ? (
-              <div className="relative flex justify-center w-full -left-10 md:-left-12">
+              <div className="relative flex justify-center w-full -left-10 ">
                 <span className="inline-flex items-center gap-px">
                   <span className="animate-blink mx-px h-1.5 w-1.5 rounded-full dark:bg-[#c3fcf2] bg-gray-500"></span>
                   <span className="animate-blink animation-delay-200 mx-px h-1.5 w-1.5 rounded-full dark:bg-[#c3fcf2] bg-gray-500"></span>

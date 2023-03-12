@@ -15,7 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="w-screen bg-[#F4f4f6] dark:bg-[#244c53] h-screen overflow-x-hidden overflow-y-scroll scroll-smooth snap-y snap-mandatory ">
+      <main className="w-screen bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-fuchsia-200 via-indigo-400 to-red-100 dark:bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] dark:from-teal-800 dark:via-rose-700 dark:to-red-900  h-screen overflow-x-hidden overflow-y-scroll scroll-smooth snap-y snap-mandatory ">
         <Header />
         <GPT />
         <Showcase />

@@ -3,7 +3,7 @@ import { ThemeToggle } from "./Theme"
 
 export const Header: React.FC = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen px-8 py-16 bg-[#F4f4f6] mx-auto overflow-y-clip snap-normal snap-start max-w-7xl lg:px-16 md:px-12 lg:py-24">
+    <div className="relative flex flex-col items-center justify-center h-screen px-8 py-16 mx-auto overflow-y-clip snap-normal snap-start max-w-7xl lg:px-16 md:px-12 lg:py-24">
       <nav className="absolute flex items-end justify-end w-full mr-8 top-6">
         <ThemeToggle />
       </nav>
@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
           <p className="mt-8 text-4xl tracking-tighter text-light-font md:text-5xl dark:text-white">
             Hello I am Umut,
           </p>
-          <p className="max-w-xl mx-auto mt-4 text-lg tracking-tighter text-light-font text-opacity-80 dark:text-gray-400">
+          <p className="max-w-xl mx-auto mt-4 text-lg tracking-tighter text-light-font text-opacity-80 dark:text-opacity-100 dark:text-gray-300">
             Front-end and smart contract developer
           </p>{" "}
         </div>
@@ -67,7 +67,7 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative flex flex-col items-center justify-center w-screen gap-2 mt-auto text-white dark:bg-[#203f4c] bg-[#152835] h-3/4 lg:h-2/3 top-48 md:top-24 ">
+      <div className="relative flex flex-col items-center justify-center w-screen gap-2 mt-auto text-white  bg-[#011627] h-3/4 lg:h-2/3 top-48 md:top-24 ">
         <h1 className="text-3xl font-semibold tracking-tighter md:text-4xl -mt-14 lg:mt-4">
           Ask me anything!
         </h1>
