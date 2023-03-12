@@ -9,12 +9,12 @@ export const ANSWERS = [
   [
     `My current tech stack consists of both front-end and back-end technologies, as well as smart contract development tools.`,
     `<p><br></p>`,
-    `<p> On the front-end side, I use HTML, CSS, and Javascript to build responsive and engaging user interfaces. I also utilize React and Next.js to create dynamic and fast-loading web applications. For styling, I rely on TailwindCSS for its intuitive utility-first approach, as well as Framer Motion for seamless animation and interactivity. To connect my front-end with the blockchain network, I use ethers.js, which enables me to interact with smart contracts using Javascript and Typescript.</p>`,
+    `<p> On the front-end side, I use HTML, CSS, Javascript and Typescript to build responsive and engaging user interfaces. I also utilize React and Next.js to create dynamic and fast-loading web applications. For styling, I rely on TailwindCSS for its intuitive utility-first approach, as well as Framer Motion for seamless animation and interactivity. To connect my front-end with the blockchain, I use ethers.js, which enables me to interact with smart contracts using Javascript and Typescript.</p>`,
     `<p><br></p>`,
     `
   <p>For back-end development, I prefer NodeJS as it provides an efficient and scalable runtime environment for server-side programming. I also use Socket.io for real-time communication between the server and the client, and mongoDB for storing and managing data.</p>`,
     `<p><br></p>`,
-    `<p>Finally, for smart contract development, I work with Solidity as my primary programming language. I use hardhat as my development environment, which provides a suite of helpful tools for building and testing smart contracts. For Zero Knowledge Proofs integration i use circom.</p>`,
+    `<p>Finally, for smart contract development, I work with Solidity as my primary programming language. I use hardhat as my development environment, which provides a suite of helpful tools for building and testing smart contracts. For Zero Knowledge Proofs i use circom and to implement them into my applications i use snarkjs.</p>`,
 
     `<p><br></p>`,
     `<p>Overall, I am comfortable and proficient in using this tech stack, and I'm always looking for opportunities to learn and experiment with new tools and technologies.</p>`,

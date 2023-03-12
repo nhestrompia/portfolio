@@ -122,7 +122,8 @@ export const Project: React.FC<IProps> = ({ projects }) => {
                 </div>
               </div>
             </div>
-            <div className=" py-4 mb-16 md:mb-0 bg-blue-200 dark:bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-fuchsia-200 via-indigo-400 to-red-100  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 dark:bg-opacity-80 md:mt-6 border dark:border-0 w-[90%] xl:w-full shadow-md rounded-lg xl:px-2 md:mx-6 lg:mx-auto ">
+            {/* dark:bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] dark:from-fuchsia-200 dark:via-indigo-400 dark:to-red-100 */}
+            <div className=" py-4 mb-16 md:mb-0 bg-[#011627] dark:bg-rose-200  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-5 dark:bg-opacity-70 md:mt-6  dark:border-0 w-[90%] xl:w-full shadow-lg rounded-lg xl:px-2 md:mx-6 lg:mx-auto ">
               <h1 className="flex justify-center pb-4 text-lg font-semibold tracking-tighter text-center dark:text-light-font 4k:text-3xl md:text-xl">
                 Tech Stack
               </h1>

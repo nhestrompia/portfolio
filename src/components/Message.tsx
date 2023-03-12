@@ -81,7 +81,7 @@ export const Message: React.FC<IProps> = ({
     )
   } else {
     return (
-      <div className="relative flex items-center w-full gap-4 px-2 lg:px-3 py-4 text-center rounded-md bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-fuchsia-500 via-blue-500 to-red-200 h-fit">
+      <div className="relative flex items-center w-full gap-4 px-2 lg:px-3 py-4 text-center rounded-md bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-blue-600 via-red-400 to-rose-500 h-fit">
         <div className="flex flex-col justify-center">
           <Image src={"/visitor.svg"} width={24} height={24} alt="visitor" />
         </div>
@@ -93,7 +93,7 @@ export const Message: React.FC<IProps> = ({
         {textIndex === 0 && (
           <button
             onClick={resetChat}
-            className="absolute p-1.5 transition ease-in-out text-white duration-300  rounded-lg shrink-0 hover:bg-[#6340bc] -right-2 md:right-0 mx-4"
+            className="absolute p-1.5 transition ease-in-out text-white duration-300  rounded-lg shrink-0 hover:bg-[#011627] -right-2 md:right-0 mx-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
