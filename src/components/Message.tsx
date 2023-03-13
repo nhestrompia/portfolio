@@ -31,7 +31,10 @@ export const Message: React.FC<IProps> = ({
             alt="umut"
           />
         </div>
-        <h1 id="message" className="leading-7 tracking-tight text-start ">
+        <h1
+          id="message"
+          className="text-sm leading-7 tracking-tight md:text-base text-start"
+        >
           <Typewriter
             options={{
               // strings: text,
@@ -81,12 +84,12 @@ export const Message: React.FC<IProps> = ({
     )
   } else {
     return (
-      <div className="relative flex items-center w-full gap-4 px-2 lg:px-3 py-4 text-center rounded-md bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-blue-600 via-red-400 to-rose-500 h-fit">
+      <div className="relative flex items-center w-full gap-2  md:gap-4 px-2 lg:px-3 py-4 text-center rounded-md bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-blue-600 via-red-400 to-rose-500 h-fit">
         <div className="flex flex-col justify-center">
           <Image src={"/visitor.svg"} width={24} height={24} alt="visitor" />
         </div>
 
-        <h1 className="text-sm leading-7 tracking-tight md:text-base text-start">
+        <h1 className="w-4/5 text-sm leading-7 tracking-tight md:w-full md:text-base text-start">
           {" "}
           {text}
         </h1>
@@ -97,7 +100,7 @@ export const Message: React.FC<IProps> = ({
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 fill-current"
+              className="w-4 h-4 fill-current md:w-6 md:h-6"
               viewBox="0 0 512 512"
             >
               <title>Reset</title>

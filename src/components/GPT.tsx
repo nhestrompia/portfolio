@@ -190,7 +190,7 @@ export const GPT: React.FC = () => {
               whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               key="info"
-              className="relative grid items-center justify-center h-full grid-cols-1 grid-rows-3 mx-auto text-center text-white md:gap-0 lg:overflow-y-hidden md:h-full md:grid-cols-3 md:bottom-16 max-w-fit"
+              className="relative grid items-center justify-center h-full grid-cols-1 grid-rows-3 gap-10 pt-12 mx-auto text-center text-white md:pt-0 md:gap-0 lg:overflow-y-hidden md:h-full md:grid-cols-3 md:bottom-16 max-w-fit"
             >
               <div className="flex flex-col items-center justify-end col-start-1 row-start-1 gap-3 p-2 md:gap-4 md:p-4 h-fit md:h-full md:justify-center md:row-start-2 ">
                 <div className="flex flex-row items-center justify-center gap-2 md:flex-col w-52 ">
@@ -301,7 +301,7 @@ export const GPT: React.FC = () => {
               key={"chat"}
               className="relative grid justify-center w-full h-[85%] scroll-smooth max-w-3xl max-h-screen grid-cols-2 grid-rows-3 mt-8 overflow-y-auto text-center text-white  md:scroll-p-4 "
             >
-              <div className="relative flex flex-col min-w-full col-span-2 col-start-1 row-start-1 gap-4 text-center text-white ">
+              <div className="relative flex flex-col w-[95%] mx-auto col-span-2 col-start-1 row-start-1 gap-4 text-center text-white lg:min-w-full ">
                 <div className="relative min-w-full gap-4 text-center text-white ">
                   {messages!.map((message, index) => {
                     return (
