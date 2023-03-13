@@ -59,6 +59,7 @@ export const projects = [
       "React",
       "Nextjs",
       "TailwindCSS",
+      "Nodejs",
       "mongoDB",
       "Solidity",
       "Ethersjs",
