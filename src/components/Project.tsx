@@ -38,7 +38,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
         layout
         initial={{ x: 100, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
-        transition={{ delay: 0.4, type: "spring" }}
+        transition={{ delay: 0.5, type: "spring" }}
         viewport={{ once: true }}
         // initial={{ opacity: 0 }}
         // animate={{ opacity: 1 }}
@@ -49,10 +49,11 @@ export const Project: React.FC<IProps> = ({ projects }) => {
           <div
             className={`flex items-center ${
               projects.title === "Binge Time" && "cursor-pointer"
-            } content-center justify-center w-full row-start-1 mt-6 xl:mt-10 `}
+            } content-center justify-center dark:filter dark:saturate-50 saturate-100 dark:brightness-90 brightness-100 w-full row-start-1 mt-6 xl:mt-10 `}
           >
             <Image
-              priority
+              // priority
+              loading="lazy"
               // src={`/${projects.image}.png`}
               src={`/${
                 isClicked && projects.title === "Binge Time"
