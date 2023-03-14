@@ -49,7 +49,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
           <div
             className={`flex items-center ${
               projects.title === "Binge Time" && "cursor-pointer"
-            } content-center justify-center dark:filter dark:saturate-50 saturate-100 dark:brightness-90 brightness-100 w-full row-start-1 mt-6 xl:mt-10 `}
+            } content-center justify-center dark:filter dark:saturate-[85%] saturate-100 dark:brightness-90 brightness-100 w-full row-start-1 mt-6 xl:mt-10 `}
           >
             <Image
               // priority
@@ -139,7 +139,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
                         <img
                           key={index}
                           src={`/tech/${item}.svg`}
-                          className="w-8 h-8"
+                          className="w-8 h-8 dark:filter dark:saturate-[85%] saturate-100 dark:brightness-90 brightness-100"
                           width={item === "Solidity" ? 16 : 36}
                           height={item === "Solidity" ? 16 : 36}
                           alt={item}
