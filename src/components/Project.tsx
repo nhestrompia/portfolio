@@ -124,8 +124,8 @@ export const Project: React.FC<IProps> = ({ projects }) => {
               </div>
             </div>
             {/* dark:bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] dark:from-fuchsia-200 dark:via-indigo-400 dark:to-red-100 */}
-            <div className=" py-4 mb-16 md:mb-0 bg-[#011627] dark:bg-rose-200  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-5 dark:bg-opacity-70 md:mt-6  dark:border-0 w-[90%] xl:w-full shadow-lg rounded-lg xl:px-2 md:mx-6 lg:mx-auto ">
-              <h1 className="flex justify-center pb-4 text-lg font-semibold tracking-tighter text-center dark:text-light-font 4k:text-3xl md:text-xl">
+            <div className=" py-4 mb-16 md:mb-0 bg-[#011627] dark:bg-rose-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-5 dark:bg-opacity-5 md:mt-6  dark:border-0 w-[90%] xl:w-full shadow-lg rounded-lg xl:px-2 md:mx-6 lg:mx-auto ">
+              <h1 className="flex justify-center pb-4 text-lg font-semibold tracking-tighter text-center dark:text-white 4k:text-3xl md:text-xl">
                 Tech Stack
               </h1>
               <div className="grid items-center justify-center w-full grid-cols-3 gap-3 md:w-full md:gap-4 md:grid-cols-4 ">
@@ -145,7 +145,7 @@ export const Project: React.FC<IProps> = ({ projects }) => {
                           alt={item}
                         />
                       </div>
-                      <span className="text-xs tracking-tighter text-black md:text-sm dark:text-light-font text-opacity-40">
+                      <span className="text-xs tracking-tighter text-black md:text-sm dark:text-[#EAE0D5] text-opacity-40">
                         {item.includes("js") || item.includes("io")
                           ? fixName(item)
                           : item}
