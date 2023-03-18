@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Head>
         <title>
-          Umut's Portfolio | Front-end and Smart Contract Developer{" "}
+          Umut&apos;s Portfolio | Front-end and Smart Contract Developer{" "}
         </title>
         <meta name="description" content="Umut's portfolio website" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
