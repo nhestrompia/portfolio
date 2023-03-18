@@ -10,7 +10,9 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Umut</title>
+        <title>
+          Umut's Portfolio | Front-end and Smart Contract Developer{" "}
+        </title>
         <meta name="description" content="Umut's portfolio website" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

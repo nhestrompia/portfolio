@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
       <div className="flex flex-col items-center justify-center w-full mt-8 text-center h-1/2 md:mt-4 lg:p-10">
         <div className="w-full mx-auto ">
           <p className="mt-8 text-4xl tracking-tighter text-light-font md:text-5xl dark:text-white">
-            Hello I am Umut,
+            Hello I am Umut
           </p>
           <p className="max-w-xl mx-auto mt-4 text-lg tracking-tighter text-light-font text-opacity-80 dark:text-opacity-100 dark:text-gray-300">
             Front-end and smart contract developer
