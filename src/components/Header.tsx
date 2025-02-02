@@ -14,7 +14,7 @@ export const Header: React.FC = () => {
             Hello I am Umut
           </p>
           <p className="max-w-xl mx-auto mt-4 text-lg tracking-tighter text-light-font text-opacity-80 dark:text-opacity-100 dark:text-gray-300">
-            Front-end and smart contract developer
+            Front-end developer
           </p>{" "}
         </div>
 
