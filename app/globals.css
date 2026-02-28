@@ -1,0 +1,265 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Instrument Design Tokens — Light Hardware Surface ── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-panel: var(--panel);
+  --color-panel-foreground: var(--panel-foreground);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-led-active: var(--led-active);
+  --color-led-building: var(--led-building);
+  --color-led-inactive: var(--led-inactive);
+  --color-led-nda: var(--led-nda);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-separator: var(--separator);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-destructive: var(--destructive);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-clip-orange: var(--clip-orange);
+  --color-clip-blue: var(--clip-blue);
+  --color-clip-yellow: var(--clip-yellow);
+  --color-bg-active: var(--bg-active);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: 0px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+}
+
+/*
+ * ── Light machined surface — hardware instrument on desk ──
+ *
+ * Background: warm light (#f3f3f1) — never pure white
+ * Dark panels: contrast UI modules (#2a2a2a)
+ * Accent: industrial orange — used for playhead, clips, active states
+ */
+:root {
+  /* Machined light surface — warm, not sterile */
+  --background: #f3f3f1;
+  --foreground: #1a1a1a;
+  --panel: #2a2a2a;
+  --panel-foreground: #e8e8e4;
+  --surface: #ffffff;
+
+  /* Industrial orange — playhead, clips, active states */
+  --accent: #ff6b35;
+  --accent-foreground: #ffffff;
+
+  /* Status LEDs */
+  --led-active: #22c55e;
+  --led-building: #ff6b35;
+  --led-inactive: #d4d4d0;
+  --led-nda: #ef4444;
+
+  /* Muted/secondary */
+  --muted: #ececea;
+  --muted-foreground: #8a8a82;
+
+  /* Borders — subtle mechanical lines */
+  --border: #dcdcdc;
+  --separator: #e8e8e6;
+
+  --primary: #1a1a1a;
+  --primary-foreground: #f3f3f1;
+  --destructive: #ef4444;
+  --ring: rgba(0, 0, 0, 0.08);
+  --input: #ececea;
+  --secondary: #ececea;
+  --secondary-foreground: #4a4a46;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+
+  /* Clip accent colors — used ONLY for project clips */
+  --clip-orange: #ff6b35;
+  --clip-blue: #3b82f6;
+  --clip-yellow: #eab308;
+
+  /* Active/hover surface */
+  --bg-active: #ececea;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar — ultra-thin, hardware-like */
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  ::selection {
+    background: rgba(255, 107, 53, 0.15);
+    color: #1a1a1a;
+  }
+}
+
+/* ── Noise texture overlay — machined surface materiality ── */
+.noise-overlay::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Reduced motion: disable all transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Signal animations — mechanical, precise, analytical ── */
+
+/* ACTIVE state: controlled signal pulse */
+@keyframes signal-active {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.08);
+  }
+}
+
+/* NEAR state: barely perceptible presence */
+@keyframes signal-near {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.02);
+  }
+}
+
+/* Master track: persistent meter drift */
+@keyframes signal-master {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scaleY(1.04);
+    opacity: 0.5;
+  }
+}
+
+/* Master LED — slow, calm glow */
+@keyframes master-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Transport REC LED — slow breathing */
+@keyframes rec-breathe {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Idle luminance drift — continuous life */
+@keyframes luminance-drift {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Playhead micro pulse — system heartbeat */
+@keyframes playhead-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Timecode counter tick */
+@keyframes timecode-tick {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Block progress bar fill */
+@keyframes block-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

@@ -1,0 +1,46 @@
+---
+name: "TRIDASH"
+slug: "tridash"
+number: "01"
+category: "ON-CHAIN GAME ENGINE"
+chain: "SOLANA"
+status: "ACTIVE"
+shortDescription: "Deterministic on-chain game engine with real-time settlement and delta tracking."
+stack:
+  - Solana
+  - Next.js
+  - Rust
+  - Indexers
+  - WebSocket
+links:
+  demo: ""
+  source: ""
+color: "#22c55e"
+impact: "Sub-second settlement for on-chain game state with deterministic resolution"
+---
+
+## SYSTEM OVERVIEW
+
+Tridash is a deterministic on-chain game engine built on Solana, designed for real-time multiplayer gameplay with provably fair settlement. The system handles state transitions, delta tracking, and worker-based resolution at sub-second latency.
+
+The core challenge: maintaining game state consistency across distributed nodes while settling outcomes on-chain within the constraints of Solana's block time.
+
+## ARCHITECTURE
+
+The engine operates on a three-layer architecture:
+
+**Client Layer** — Real-time UI with optimistic state updates. WebSocket connections maintain sub-50ms sync with the settlement layer.
+
+**Resolution Layer** — Worker-based system that processes game state deltas, validates transitions, and batches settlements. Handles conflict resolution using deterministic ordering.
+
+**Settlement Layer** — Solana programs handling final state commitment, reward distribution, and proof generation.
+
+## ENGINEERING CHALLENGES
+
+- **Deterministic settlement** — Game outcomes must be identical regardless of which node processes them. Implemented a custom ordering protocol that guarantees convergence.
+
+- **Real-time delta tracking** — Tracking state changes across multiple concurrent sessions requires efficient diff algorithms. Built a compact binary delta format that reduces on-chain data by 94%.
+
+- **Worker resolution system** — Distributed workers process game logic off-chain and submit proofs on-chain. Auto-scaling based on session load with graceful degradation.
+
+- **Latency budget** — Total round-trip from player action to confirmed settlement: <800ms. Required custom RPC routing and transaction priority optimization.

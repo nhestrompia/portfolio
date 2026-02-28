@@ -1,0 +1,44 @@
+---
+name: "SHIELDED x402"
+slug: "shielded-x402"
+number: "02"
+category: "PAYMENT PROTOCOL"
+chain: "SOLANA"
+status: "BUILDING"
+shortDescription: "Privacy-preserving payment protocol with x402 HTTP integration for gated content and APIs."
+stack:
+  - Solana
+  - Rust
+  - Next.js
+  - Node.js
+  - Cryptography
+links:
+  demo: ""
+  source: ""
+color: "#f59e0b"
+impact: "Enabling programmable payments with built-in privacy at the protocol level"
+---
+
+## SYSTEM OVERVIEW
+
+Shielded x402 implements the HTTP 402 Payment Required standard with privacy-preserving payment channels on Solana. Content creators and API providers can gate access behind micropayments without exposing transaction graphs.
+
+The protocol bridges traditional HTTP semantics with on-chain settlement, making pay-per-use APIs and content accessible through standard web infrastructure.
+
+## ARCHITECTURE
+
+**HTTP Layer** — Middleware that intercepts 402 responses and initiates payment flows. Compatible with any web framework through standard request/response hooks.
+
+**Channel Layer** — Payment channels that batch micropayments off-chain, settling periodically on Solana. Supports both one-time payments and streaming subscriptions.
+
+**Privacy Layer** — Zero-knowledge proofs verify payment validity without revealing payer identity or transaction amounts to content providers.
+
+## ENGINEERING CHALLENGES
+
+- **x402 standard compliance** — Implementing the payment negotiation flow within HTTP semantics while maintaining backward compatibility with existing web infrastructure.
+
+- **Channel state management** — Tracking off-chain payment channel state across distributed nodes with eventual on-chain settlement. Built a custom state machine that handles disputes and timeouts.
+
+- **Privacy-performance tradeoff** — ZK proof generation must happen client-side within acceptable latency. Optimized circuits for browser WASM execution under 200ms.
+
+- **Integration simplicity** — The SDK must be drop-in for existing web applications. Single middleware function for server-side, single hook for client-side.
