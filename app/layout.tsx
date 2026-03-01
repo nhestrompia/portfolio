@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s — UMUT.SYSTEM",
   },
   description:
-    "Web3 systems engineer & product builder. Realtime trading systems, on-chain engines, and protocol infrastructure.",
+    "Full-stack engineer & product builder. Realtime trading systems, on-chain engines, and protocol infrastructure.",
   keywords: [
     "Web3",
     "Solana",
@@ -22,16 +22,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "UMUT.SYSTEM — Web3 Product Engineer",
+    title: "UMUT.SYSTEM — Full-Stack Engineer",
     description:
-      "Web3 systems engineer & product builder. Realtime trading systems, on-chain engines, protocol infrastructure.",
+      "Full-stack engineer & product builder. Realtime trading systems, on-chain engines, protocol infrastructure.",
     siteName: "UMUT.SYSTEM",
   },
   twitter: {
     card: "summary_large_image",
-    title: "UMUT.SYSTEM — Web3 Product Engineer",
+    title: "UMUT.SYSTEM — Full-Stack Engineer",
     description:
-      "Web3 systems engineer & product builder. Realtime systems, on-chain engines, protocol infrastructure.",
+      "Full-stack engineer & product builder. Realtime trading systems, on-chain engines, protocol infrastructure.",
   },
   robots: {
     index: true,
