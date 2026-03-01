@@ -20,17 +20,27 @@ const INPUT_PORTS = [
 ];
 
 const STACK_BADGES = [
-  "Typescript",
+  "TypeScript",
   "React",
   "Next.js",
+  "React Native",
+  "TailwindCSS",
+  "Framer Motion",
+  "GraphQL",
+  "Zustand",
+  "Ethereum",
   "Solidity",
-  "Wagmi/Viem",
   "Foundry",
-  "Hardhat",
+  "Wagmi/Viem",
+  "Noir",
+  "Solana",
   "Rust",
+  "Anchor",
   "Node.js",
   "PostgreSQL",
   "MongoDB",
+  "Prisma",
+  "DrizzleORM",
 ];
 
 const HACKATHONS = [
@@ -131,7 +141,7 @@ export function AboutPanel() {
                 BIO
               </span>
               <p className="text-[10px] font-mono text-panel-foreground/70 leading-relaxed">
-                Web3 product engineer specializing in realtime systems, on-chain
+                Fullstack Engineer specializing in realtime systems, on-chain
                 economics, and execution infrastructure. Building the interfaces
                 between blockchain protocols and human experience.
               </p>
@@ -205,7 +215,7 @@ export function AboutPanel() {
             {/* Action buttons */}
             <div className="flex gap-2">
               <a
-                href="mailto:hello@umut.dev"
+                href="mailto:nhestrompia@gmail.com"
                 className="flex-1 text-center text-[9px] font-mono tracking-[0.15em] py-2.5
                            bg-accent text-accent-foreground rounded-sm
                            hover:bg-accent/90 transition-colors"

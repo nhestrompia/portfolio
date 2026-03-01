@@ -100,12 +100,21 @@ function RenderContent({ body }: { body: string }) {
           );
         }
 
+        const inlineParts = p.split(/(\*\*[^*]+\*\*)/);
         return (
           <p
             key={i}
             className="text-[11px] text-muted-foreground leading-relaxed"
           >
-            {p}
+            {inlineParts.map((part, k) =>
+              part.startsWith("**") && part.endsWith("**") ? (
+                <span key={k} className="text-foreground/80 font-medium">
+                  {part.replace(/\*\*/g, "")}
+                </span>
+              ) : (
+                <span key={k}>{part}</span>
+              ),
+            )}
           </p>
         );
       })}
