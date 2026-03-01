@@ -1,46 +1,61 @@
 ---
 name: "TRIDASH"
 slug: "tridash"
-number: "01"
-category: "ON-CHAIN GAME ENGINE"
+number: "04"
+category: "REALTIME ON-CHAIN SYSTEM"
 chain: "SOLANA"
-status: "ACTIVE"
-shortDescription: "Deterministic on-chain game engine with real-time settlement and delta tracking."
+status: "LIVE / BUILDING"
+shortDescription: "Realtime on-chain prediction engine exploring synchronized market rounds and deterministic settlement."
 stack:
-  - Solana
   - Next.js
+  - TailwindCSS
   - Rust
-  - Indexers
-  - WebSocket
+  - Anchor
+  - Pyth
 links:
-  demo: ""
   source: ""
-color: "#22c55e"
-impact: "Sub-second settlement for on-chain game state with deterministic resolution"
+color: "#ef4444"
+impact: "Explores low-latency on-chain interaction models for realtime competitive systems."
 ---
 
 ## SYSTEM OVERVIEW
 
-Tridash is a deterministic on-chain game engine built on Solana, designed for real-time multiplayer gameplay with provably fair settlement. The system handles state transitions, delta tracking, and worker-based resolution at sub-second latency.
+TriDash is an actively developed realtime on-chain system focused on synchronized market interaction and deterministic round-based settlement.
 
-The core challenge: maintaining game state consistency across distributed nodes while settling outcomes on-chain within the constraints of Solana's block time.
+The project explores how blockchain applications can operate under strict timing constraints while maintaining transparent and verifiable outcomes.
 
-## ARCHITECTURE
+Unlike traditional asynchronous DeFi interaction, TriDash experiments with coordinated execution windows shared across participants.
 
-The engine operates on a three-layer architecture:
+---
 
-**Client Layer** — Real-time UI with optimistic state updates. WebSocket connections maintain sub-50ms sync with the settlement layer.
+## CURRENT MODE
 
-**Resolution Layer** — Worker-based system that processes game state deltas, validates transitions, and batches settlements. Handles conflict resolution using deterministic ordering.
+STATE: ACTIVE DEVELOPMENT
+VISIBILITY: LIMITED
+NETWORK: SOLANA DEVNET
 
-**Settlement Layer** — Solana programs handling final state commitment, reward distribution, and proof generation.
+TriDash is currently evolving as a live system. Architecture and mechanics remain under active iteration.
 
-## ENGINEERING CHALLENGES
+---
 
-- **Deterministic settlement** — Game outcomes must be identical regardless of which node processes them. Implemented a custom ordering protocol that guarantees convergence.
+## ENGINEERING FOCUS
 
-- **Real-time delta tracking** — Tracking state changes across multiple concurrent sessions requires efficient diff algorithms. Built a compact binary delta format that reduces on-chain data by 94%.
+- Realtime round synchronization across users
+- Deterministic settlement under network latency
+- Low-friction on-chain participation
+- Worker-driven resolution pipelines
+- Market data alignment with blockchain state
 
-- **Worker resolution system** — Distributed workers process game logic off-chain and submit proofs on-chain. Auto-scaling based on session load with graceful degradation.
+---
 
-- **Latency budget** — Total round-trip from player action to confirmed settlement: <800ms. Required custom RPC routing and transaction priority optimization.
+## DESIGN QUESTION
+
+Can blockchain systems support realtime competitive interaction without sacrificing determinism or fairness?
+
+TriDash serves as an exploration of this execution model.
+
+---
+
+## STATUS
+
+This module represents ongoing work and is intentionally documented at a high level while development continues.

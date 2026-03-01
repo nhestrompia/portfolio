@@ -14,7 +14,7 @@ const BOOT_CHECKS = [
 ] as const;
 
 const TOTAL_BLOCKS = 16;
-const BOOT_DURATION = 500;
+const BOOT_DURATION = 200;
 
 export function BootScreen() {
   const router = useRouter();
@@ -119,9 +119,6 @@ export function BootScreen() {
               <span className="text-[8px] md:text-[9px] font-mono tracking-[0.2em] text-muted-foreground">
                 MODEL: UMUT_SYS_01
               </span>
-              <span className="text-[8px] md:text-[9px] font-mono tracking-[0.2em] text-muted-foreground hidden sm:inline">
-                SERIAL: 2024.06.01
-              </span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-led-active animate-pulse" />
@@ -146,7 +143,7 @@ export function BootScreen() {
                   UMUT.SYSTEM
                 </h1>
                 <p className="text-[9px] font-mono tracking-[0.2em] text-muted-foreground uppercase">
-                  Hardware Interface Module
+                  Full Stack Developer
                 </p>
               </div>
             </motion.div>
@@ -283,7 +280,7 @@ export function BootScreen() {
                       <div
                         key={j}
                         className={`w-1 h-2 rounded-[0.5px] ${
-                          j < 2 + Math.floor(Math.random() * 2)
+                          j < 3
                             ? "bg-muted-foreground/20"
                             : "bg-muted-foreground/8"
                         }`}

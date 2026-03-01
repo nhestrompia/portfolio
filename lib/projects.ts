@@ -8,7 +8,14 @@ export interface ProjectMeta {
   number: string;
   category: string;
   chain: string;
-  status: "ACTIVE" | "BUILDING" | "NDA" | "SHIPPED" | "LIVE";
+  status:
+    | "ACTIVE"
+    | "BUILDING"
+    | "NDA"
+    | "SHIPPED"
+    | "LIVE"
+    | "RESEARCH"
+    | "LIVE / BUILDING";
   shortDescription: string;
   stack: string[];
   links: {

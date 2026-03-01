@@ -1,0 +1,78 @@
+---
+name: "ZK BLACKJACK"
+slug: "zkblackjack"
+number: "04"
+category: "ZERO-KNOWLEDGE SYSTEM"
+chain: "ETHEREUM"
+status: "SHIPPED"
+shortDescription: "On-chain multiplayer blackjack using zero-knowledge proofs to verify round outcomes without trusted game logic."
+stack:
+  - Next.js
+  - TailwindCSS
+  - Solidity
+  - Circom
+  - SnarkJS
+  - Node.js
+  - Socket.io
+links:
+  source: "https://github.com/nhestrompia/zkBlackjack"
+color: "#22c55e"
+impact: "Explores private state verification for interactive on-chain applications"
+---
+
+## SYSTEM OVERVIEW
+
+zkBlackjack is an on-chain singleplayer and multiplayer blackjack system where each round outcome is verified using zero-knowledge proofs rather than trusted backend execution.
+
+Game correctness is enforced cryptographically. Players prove valid outcomes without exposing hidden game state such as cards or intermediate decisions.
+
+The project investigates how interactive real-time applications can operate securely on public blockchain infrastructure.
+
+## ARCHITECTURE
+
+**Game Contract Layer**
+
+Smart contracts manage wagers, round lifecycle, and payout settlement. Funds remain locked on-chain until proof verification completes.
+
+**ZK Verification Layer**
+
+Circom circuits generate proofs confirming that blackjack rules were followed correctly and that the declared winner is valid.
+
+Proofs are verified on-chain before settlement.
+
+**Realtime Coordination Layer**
+
+Socket-based synchronization enables multiplayer sessions while maintaining deterministic blockchain settlement.
+
+**Frontend Interface**
+
+Next.js client handles gameplay interaction and local proof generation using snarkjs.
+
+## ENGINEERING CHALLENGES
+
+- **Private game state**
+
+  Blackjack requires hidden card information. Designed circuits capable of verifying legality of moves without revealing player hands.
+
+- **Proof latency**
+
+  Browser-side proof generation optimized to maintain playable round timing.
+
+- **Multiplayer synchronization**
+
+  Coordinating realtime sessions while final authority remains on-chain.
+
+- **Gas-aware verification**
+
+  Reduced verifier complexity to maintain feasible Ethereum execution costs.
+
+## SYSTEM SIGNIFICANCE
+
+zkBlackjack serves as an experimental model for:
+
+- private multiplayer applications
+- zk-verified interaction systems
+- trustless game execution
+- cryptographic state validation
+
+Beyond gaming, the architecture applies directly to private auctions, prediction markets, and agent coordination systems.

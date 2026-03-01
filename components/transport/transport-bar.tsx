@@ -1,6 +1,7 @@
 "use client";
 
 import { useAudioStore } from "@/store/audio";
+import { useSignalStore } from "@/store/signal";
 import { useTransportStore, type PanelType } from "@/store/transport";
 import { motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
@@ -21,6 +22,8 @@ export function TransportBar() {
     syncLink,
   } = useTransportStore();
   const { playSound, toggle, enabled: audioEnabled } = useAudioStore();
+  const signalActive = useSignalStore((s) => s.active);
+  const signalToggle = useSignalStore((s) => s.toggle);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -122,6 +125,23 @@ export function TransportBar() {
               style={{ animation: "rec-breathe 3s ease-in-out infinite" }}
             />
           </div>
+
+          {/* SIGNAL toggle */}
+          <button
+            onClick={() => {
+              playSound("tick");
+              signalToggle();
+            }}
+            className={`h-7 md:h-8 px-2 rounded-sm border text-[8px] font-mono tracking-[0.15em] transition-colors cursor-pointer ${
+              signalActive
+                ? "border-accent bg-accent/10 text-accent"
+                : "border-border bg-muted text-muted-foreground hover:text-foreground/70"
+            }`}
+            aria-label="Toggle Signal Mode"
+            title="Signal Mode (D)"
+          >
+            SIGNAL
+          </button>
         </div>
 
         {/* Status indicators — hidden on mobile */}

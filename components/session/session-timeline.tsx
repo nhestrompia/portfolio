@@ -18,30 +18,34 @@ interface SessionTimelineProps {
 const CLIP_COLORS: Record<string, string> = {
   tridash: "bg-clip-orange",
   "shielded-x402": "bg-clip-blue",
-  "trading-infra": "bg-clip-yellow",
-  about: "bg-emerald-500",
+  seloria: "bg-violet-400",
+  zkblackjack: "bg-emerald-400",
+  about: "bg-clip-yellow",
 };
 
 const CLIP_BORDER_COLORS: Record<string, string> = {
   tridash: "border-foreground/20",
   "shielded-x402": "border-foreground/20",
-  "trading-infra": "border-foreground/20",
+  seloria: "border-foreground/20",
+  zkblackjack: "border-foreground/20",
   about: "border-foreground/20",
 };
 
 /* Badge labels shown on each clip */
 const CLIP_BADGE: Record<string, string> = {
-  tridash: "ENGINE_FLOW",
-  "shielded-x402": "X402_PULSE",
-  "trading-infra": "INFRA_CHAIN",
-  about: "OPER_INFO",
+  tridash: "PREDICTION_ENGINE",
+  "shielded-x402": "X402_SDK",
+  seloria: "AGENT_CHAIN",
+  zkblackjack: "ZK_APP",
+  about: "INFO",
 };
 
 /* Subtitle text for each clip */
 const CLIP_SUBTITLE: Record<string, string> = {
-  tridash: "CORE ARCH",
-  "shielded-x402": "SCALING LOGIC",
-  "trading-infra": "ASSET LIBRARY",
+  tridash: "TRIDASH",
+  "shielded-x402": "SHIELDED X402",
+  seloria: "SELORIA",
+  zkblackjack: "ZKBLACKJACK",
   about: "BIO & STACK",
 };
 
@@ -49,28 +53,31 @@ const CLIP_SUBTITLE: Record<string, string> = {
 type VizType = "waveform" | "midi" | "dots";
 const CLIP_VIZ: Record<string, VizType> = {
   tridash: "waveform",
-  "shielded-x402": "dots",
-  "trading-infra": "midi",
+  "shielded-x402": "waveform",
+  seloria: "midi",
+  zkblackjack: "midi",
   about: "waveform",
 };
 
 /* All clip positions as percentage of total duration (0–100) */
-const TOTAL_LANES = 4;
+const TOTAL_LANES = 5;
 
-/* start/width in % of timeline; lane is the default index (overridden by trackOrder) */
+/* start/width in % of timeline — staggered so each clip plays sequentially */
 const CLIP_LAYOUT: Record<string, { start: number; width: number }> = {
-  tridash: { start: 3, width: 28 },
-  "shielded-x402": { start: 34, width: 26 },
-  about: { start: 55, width: 16 },
-  "trading-infra": { start: 64, width: 20 },
+  about: { start: 2, width: 16 },
+  "shielded-x402": { start: 20, width: 18 },
+  tridash: { start: 40, width: 18 },
+  seloria: { start: 60, width: 18 },
+  zkblackjack: { start: 80, width: 18 },
 };
 
 /* Default order (used if store hasn't been initialised yet) */
 const DEFAULT_TRACK_ORDER = [
-  "tridash",
-  "shielded-x402",
   "about",
-  "trading-infra",
+  "shielded-x402",
+  "tridash",
+  "seloria",
+  "zkblackjack",
 ];
 
 /* About track virtual data */
@@ -173,40 +180,174 @@ function WaveformVizAbout() {
   );
 }
 
-/* MIDI block visualization — rectangular note blocks spread across the clip */
-function MidiViz() {
-  // Deterministic MIDI "notes" — positioned as (x%, y%, w%, h%)
-  const notes = [
-    { x: 5, y: 25, w: 12, h: 18 },
-    { x: 20, y: 55, w: 8, h: 15 },
-    { x: 32, y: 15, w: 14, h: 20 },
-    { x: 50, y: 40, w: 6, h: 22 },
-    { x: 60, y: 65, w: 10, h: 14 },
-    { x: 74, y: 20, w: 8, h: 25 },
-    { x: 85, y: 50, w: 10, h: 18 },
-  ];
+/* MIDI piano-roll visualization — horizontal note bars on a pitch grid, like a real DAW */
+
+/* Variation A: dense melodic pattern (seloria) — arpeggiated chords + runs */
+const MIDI_NOTES_A: { x: number; y: number; w: number }[] = [
+  // Bar 1 — opening chord + arp
+  { x: 1, y: 85, w: 6 },
+  { x: 1, y: 70, w: 4 },
+  { x: 1, y: 55, w: 3 },
+  { x: 5, y: 60, w: 3 },
+  { x: 8, y: 50, w: 4 },
+  { x: 8, y: 75, w: 5 },
+  { x: 13, y: 45, w: 2 },
+  { x: 13, y: 65, w: 3 },
+  { x: 16, y: 40, w: 3 },
+  // Bar 2 — ascending run
+  { x: 20, y: 80, w: 5 },
+  { x: 20, y: 60, w: 3 },
+  { x: 24, y: 55, w: 2 },
+  { x: 26, y: 50, w: 2 },
+  { x: 28, y: 45, w: 3 },
+  { x: 28, y: 70, w: 4 },
+  { x: 31, y: 35, w: 2 },
+  { x: 33, y: 30, w: 3 },
+  { x: 33, y: 55, w: 2 },
+  { x: 36, y: 25, w: 2 },
+  { x: 36, y: 50, w: 4 },
+  // Bar 3 — descending + staccato
+  { x: 41, y: 20, w: 4 },
+  { x: 41, y: 40, w: 3 },
+  { x: 45, y: 30, w: 2 },
+  { x: 47, y: 35, w: 2 },
+  { x: 49, y: 45, w: 3 },
+  { x: 49, y: 65, w: 2 },
+  { x: 52, y: 50, w: 2 },
+  { x: 54, y: 55, w: 3 },
+  { x: 54, y: 75, w: 4 },
+  { x: 57, y: 60, w: 2 },
+  { x: 59, y: 70, w: 3 },
+  // Bar 4 — resolution + final chord
+  { x: 62, y: 80, w: 6 },
+  { x: 62, y: 55, w: 4 },
+  { x: 62, y: 35, w: 3 },
+  { x: 67, y: 45, w: 2 },
+  { x: 69, y: 40, w: 3 },
+  { x: 69, y: 65, w: 2 },
+  { x: 72, y: 50, w: 4 },
+  { x: 72, y: 25, w: 3 },
+  { x: 76, y: 30, w: 2 },
+  { x: 78, y: 60, w: 3 },
+  { x: 78, y: 85, w: 5 },
+  // Bar 5 — outro sustains
+  { x: 83, y: 75, w: 6 },
+  { x: 83, y: 50, w: 4 },
+  { x: 83, y: 30, w: 3 },
+  { x: 87, y: 40, w: 3 },
+  { x: 90, y: 55, w: 4 },
+  { x: 90, y: 70, w: 3 },
+  { x: 94, y: 45, w: 4 },
+  { x: 94, y: 80, w: 5 },
+];
+
+/* Variation B: rhythmic / percussive pattern (zkblackjack) — stabs + gaps */
+const MIDI_NOTES_B: { x: number; y: number; w: number }[] = [
+  // Bar 1 — sharp stabs
+  { x: 1, y: 75, w: 3 },
+  { x: 1, y: 45, w: 2 },
+  { x: 4, y: 30, w: 2 },
+  { x: 7, y: 75, w: 2 },
+  { x: 7, y: 55, w: 2 },
+  { x: 10, y: 40, w: 3 },
+  { x: 13, y: 80, w: 2 },
+  { x: 13, y: 20, w: 2 },
+  { x: 16, y: 60, w: 3 },
+  { x: 16, y: 35, w: 2 },
+  // Bar 2 — syncopated
+  { x: 21, y: 70, w: 4 },
+  { x: 21, y: 25, w: 2 },
+  { x: 25, y: 50, w: 2 },
+  { x: 27, y: 85, w: 3 },
+  { x: 27, y: 40, w: 2 },
+  { x: 30, y: 15, w: 2 },
+  { x: 33, y: 60, w: 3 },
+  { x: 33, y: 30, w: 2 },
+  { x: 36, y: 75, w: 2 },
+  { x: 38, y: 45, w: 3 },
+  // Bar 3 — dense cluster
+  { x: 42, y: 65, w: 2 },
+  { x: 42, y: 35, w: 2 },
+  { x: 42, y: 85, w: 3 },
+  { x: 44, y: 50, w: 2 },
+  { x: 46, y: 20, w: 2 },
+  { x: 46, y: 70, w: 3 },
+  { x: 49, y: 40, w: 2 },
+  { x: 51, y: 55, w: 2 },
+  { x: 51, y: 80, w: 3 },
+  { x: 53, y: 30, w: 2 },
+  { x: 55, y: 60, w: 3 },
+  { x: 55, y: 15, w: 2 },
+  { x: 58, y: 45, w: 2 },
+  { x: 58, y: 75, w: 2 },
+  // Bar 4 — breakdown
+  { x: 62, y: 25, w: 5 },
+  { x: 62, y: 55, w: 4 },
+  { x: 67, y: 70, w: 2 },
+  { x: 67, y: 40, w: 2 },
+  { x: 70, y: 85, w: 3 },
+  { x: 70, y: 15, w: 2 },
+  { x: 73, y: 50, w: 3 },
+  { x: 76, y: 35, w: 2 },
+  { x: 76, y: 65, w: 3 },
+  // Bar 5 — tail off
+  { x: 81, y: 80, w: 3 },
+  { x: 81, y: 30, w: 2 },
+  { x: 84, y: 55, w: 3 },
+  { x: 87, y: 70, w: 2 },
+  { x: 87, y: 20, w: 2 },
+  { x: 90, y: 45, w: 4 },
+  { x: 90, y: 75, w: 3 },
+  { x: 94, y: 60, w: 4 },
+  { x: 94, y: 35, w: 3 },
+];
+
+const PITCH_ROWS = 12; // number of horizontal grid rows
+const NOTE_H = 100 / PITCH_ROWS; // height of one pitch row in %
+const BEAT_DIVISIONS = 16; // vertical beat lines
+
+function MidiViz({ variant = "a" }: { variant?: "a" | "b" }) {
+  const notes = variant === "a" ? MIDI_NOTES_A : MIDI_NOTES_B;
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {notes.map((n, i) => (
+      {/* Horizontal pitch-row grid lines */}
+      {Array.from({ length: PITCH_ROWS - 1 }).map((_, i) => (
         <div
-          key={i}
-          className="absolute bg-white/20 rounded-[1px] border border-white/10"
-          style={{
-            left: `${n.x}%`,
-            top: `${n.y}%`,
-            width: `${n.w}%`,
-            height: `${n.h}%`,
-          }}
+          key={`h-${i}`}
+          className="absolute left-0 right-0 h-px bg-white/[0.07]"
+          style={{ top: `${((i + 1) * 100) / PITCH_ROWS}%` }}
         />
       ))}
-      {/* Horizontal grid lines for MIDI look */}
-      {[20, 40, 60, 80].map((y) => (
+      {/* Vertical beat-division lines */}
+      {Array.from({ length: BEAT_DIVISIONS - 1 }).map((_, i) => (
         <div
-          key={y}
-          className="absolute left-0 right-0 h-px bg-white/8"
-          style={{ top: `${y}%` }}
+          key={`v-${i}`}
+          className={`absolute top-0 bottom-0 w-px ${
+            (i + 1) % 4 === 0 ? "bg-white/[0.12]" : "bg-white/[0.05]"
+          }`}
+          style={{ left: `${((i + 1) * 100) / BEAT_DIVISIONS}%` }}
         />
       ))}
+      {/* Note bars — snap y to nearest pitch row */}
+      {notes.map((n, i) => {
+        const pitchRow = Math.round((n.y / 100) * (PITCH_ROWS - 1));
+        const snapY = (pitchRow / PITCH_ROWS) * 100;
+        return (
+          <div
+            key={i}
+            className="absolute rounded-[1px]"
+            style={{
+              left: `${n.x}%`,
+              top: `${snapY + 1}%`,
+              width: `${n.w}%`,
+              height: `${NOTE_H - 2}%`,
+              background: "rgba(255,255,255,0.35)",
+              boxShadow: "0 0 1px rgba(255,255,255,0.15)",
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
@@ -252,7 +393,7 @@ function ClipViz({ slug }: { slug: string }) {
   const vizType = CLIP_VIZ[slug] || "waveform";
   switch (vizType) {
     case "midi":
-      return <MidiViz />;
+      return <MidiViz variant={slug === "zkblackjack" ? "b" : "a"} />;
     case "dots":
       return <DotsViz />;
     case "waveform":
@@ -404,6 +545,10 @@ export function SessionTimeline({ projects }: SessionTimelineProps) {
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
+      /* If the tap landed on a clip (or its children), don't capture — let onClick handle it */
+      const target = e.target as HTMLElement;
+      if (target.closest("[data-clip]")) return;
+
       isDragging.current = true;
       (e.target as HTMLElement).setPointerCapture(e.pointerId);
       const pos = getPositionFromEvent(e.clientX);
@@ -473,7 +618,8 @@ export function SessionTimeline({ projects }: SessionTimelineProps) {
           {/* Clip lanes */}
           <div
             ref={containerRef}
-            className="flex-1 relative overflow-hidden cursor-crosshair select-none touch-none"
+            className="flex-1 relative overflow-hidden cursor-crosshair select-none"
+            style={{ touchAction: "manipulation" }}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
@@ -519,6 +665,7 @@ export function SessionTimeline({ projects }: SessionTimelineProps) {
               return (
                 <motion.div
                   key={project.slug}
+                  data-clip
                   className={`absolute rounded-md border-2 ${borderColor} ${clipColor} cursor-pointer overflow-hidden
                              transition-shadow duration-200
                              ${isActive ? "shadow-lg ring-1 ring-foreground/10" : "shadow-sm"}`}
@@ -561,6 +708,7 @@ export function SessionTimeline({ projects }: SessionTimelineProps) {
               const isActive = activeTrack === "about";
               return (
                 <motion.div
+                  data-clip
                   className={`absolute rounded-md border-2 ${CLIP_BORDER_COLORS.about} ${CLIP_COLORS.about} cursor-pointer overflow-hidden
                              transition-shadow duration-200
                              ${isActive ? "shadow-lg ring-1 ring-foreground/10" : "shadow-sm"}`}

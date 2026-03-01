@@ -1,0 +1,64 @@
+---
+name: "SELORIA"
+slug: "seloria"
+number: "03"
+category: "AGENT-NATIVE CHAIN EXPERIMENT"
+chain: "CUSTOM"
+status: "RESEARCH"
+shortDescription: "Experimental blockchain exploring execution and consensus models where autonomous agents are the primary network participants."
+stack:
+  - Rust
+  - BFT Consensus
+  - Distributed Systems
+  - KV State Model
+  - Agent Architecture
+links:
+  demo: ""
+  source: "https://github.com/nhestrompia/seloria"
+color: "#60a5fa"
+impact: "Explores minimal blockchain primitives optimized for agent-to-agent coordination."
+---
+
+## SYSTEM OVERVIEW
+
+Seloria is an experimental blockchain investigating how distributed systems change when autonomous agents — not humans — are the primary users.
+
+Instead of smart contracts or virtual machines, Seloria explores a minimal execution model based on native state transitions over shared KV storage.
+
+It includes a minimal AMM example.
+
+The project focuses on understanding coordination, execution, and consensus primitives better suited for agent-driven environments.
+
+---
+
+## ARCHITECTURE
+
+**Agent Validators**  
+Validators are autonomous agents capable of submitting transactions and participating in block production.
+
+**KV-State Execution**  
+Applications are expressed as native state updates rather than VM-based smart contracts.
+
+**BFT Consensus**  
+A Tendermint-style committee coordinates block production and finality.
+
+**Agent Coordination Model**  
+Designed to explore low-friction interaction between autonomous systems rather than human wallets.
+
+---
+
+## ENGINEERING QUESTIONS
+
+- Do agents require smart contracts or simpler execution primitives?
+- Can KV-based state outperform VM-based execution for coordination?
+- What consensus assumptions change in agent-heavy networks?
+- Can we minimize hallucinations and loss of funds by agents via agent-native execution?
+- How should blockchains expose capabilities to autonomous actors?
+
+---
+
+## PURPOSE
+
+Seloria is not intended as a production chain.
+
+It serves as a research environment for exploring execution models that may better support future agent-to-agent economic systems.

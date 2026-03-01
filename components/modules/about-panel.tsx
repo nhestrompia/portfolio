@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 const SPEC_FIELDS = [
   { label: "MODEL", value: "UMUT_SYS_01" },
   { label: "CORE", value: "FULLSTACK_DEVELOPER" },
-  { label: "OUTPUT", value: "SYSTEMS / PROTOCOLS / PRODUCTS" },
-  { label: "FREQUENCY", value: "SOLANA / ETHEREUM / MULTI-CHAIN" },
+  { label: "OUTPUT", value: "PRODUCTS / SYSTEMS / PROTOCOLS  " },
+  { label: "FREQUENCY", value: "MULTI-CHAIN" },
 ];
 
 const INPUT_PORTS = [
@@ -25,12 +25,25 @@ const STACK_BADGES = [
   "Next.js",
   "Solidity",
   "Wagmi/Viem",
-  "Rust(learning)",
   "Foundry",
   "Hardhat",
+  "Rust",
   "Node.js",
   "PostgreSQL",
   "MongoDB",
+];
+
+const HACKATHONS = [
+  { event: "ETHGlobal Bangkok", result: "Finalist" },
+  { event: "zkHack Istanbul", result: "o1Labs Game Track Winner" },
+  {
+    event: "Aleo zkHackathon Istanbul",
+    result: "Overall 2nd, 1st (Obscura), 3rd (Puzzle Wallet)",
+  },
+  {
+    event: "ETH Taipei 2024",
+    result: "1st (Polygon & Scroll), Best Project (Ten Protocol)",
+  },
 ];
 
 export function AboutPanel() {
@@ -142,6 +155,31 @@ export function AboutPanel() {
             </div>
 
             {/* Input ports (contact links) */}
+            <div>
+              <span className="text-[8px] font-mono tracking-[0.2em] text-muted-foreground block mb-2">
+                HACKATHONS
+              </span>
+              <div className="bg-surface border border-border rounded-sm divide-y divide-border">
+                {HACKATHONS.map((h, i) => (
+                  <motion.div
+                    key={h.event}
+                    className="px-4 py-2.5 flex items-start justify-between gap-3"
+                    initial={{ opacity: 0, x: 6 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04, duration: 0.15 }}
+                  >
+                    <span className="text-[9px] font-mono text-foreground/70 shrink-0">
+                      {h.event}
+                    </span>
+                    <span className="text-[8px] font-mono text-accent tracking-[0.05em] text-right leading-snug">
+                      {h.result}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact links */}
             <div>
               <span className="text-[8px] font-mono tracking-[0.2em] text-muted-foreground block mb-2">
                 CONTACT

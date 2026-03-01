@@ -1,4 +1,5 @@
 import { SessionShell } from "@/components/session/session-shell";
+import { SignalOverlay } from "@/components/signal/signal-overlay";
 import { SystemBar } from "@/components/session/system-bar";
 import { TransportBar } from "@/components/transport/transport-bar";
 
@@ -13,7 +14,9 @@ export default function SessionLayout({
         {/* Top system bar */}
         <SystemBar />
         {/* Main content area — timeline + panels */}
-        <div className="flex-1 min-h-0">{children}</div>
+        <div className="flex-1 min-h-0 flex flex-col">{children}</div>
+        {/* Signal Mode overlay */}
+        <SignalOverlay />
         {/* Bottom transport bar */}
         <TransportBar />
       </div>

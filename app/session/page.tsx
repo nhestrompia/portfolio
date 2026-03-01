@@ -24,7 +24,9 @@ export default function SessionPage() {
         </div>
       </div>
       {/* Bottom: Track Manager tray — mobile only */}
-      <TrackManager projects={projects} variant="tray" />
+      <div className="shrink-0 md:hidden">
+        <TrackManager projects={projects} variant="tray" />
+      </div>
     </div>
   );
 }

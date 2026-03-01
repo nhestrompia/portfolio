@@ -1,44 +1,68 @@
 ---
 name: "SHIELDED x402"
 slug: "shielded-x402"
-number: "02"
-category: "PAYMENT PROTOCOL"
-chain: "SOLANA"
+number: "01"
+category: "PRIVATE AGENT EXECUTION"
+chain: "EVM + SOLANA"
 status: "BUILDING"
-shortDescription: "Privacy-preserving payment protocol with x402 HTTP integration for gated content and APIs."
+shortDescription: "Shielded x402 execution layer enabling agents to privately discover, pay, and execute services across EVM and Solana using ERC-8004."
 stack:
-  - Solana
+  - TypeScript
+  - Noir
+  - Solidity
+  - ERC-8004
   - Rust
-  - Next.js
   - Node.js
-  - Cryptography
+
 links:
-  demo: ""
-  source: ""
+  source: "https://github.com/nhestrompia/shielded-x402"
 color: "#f59e0b"
-impact: "Enabling programmable payments with built-in privacy at the protocol level"
+impact: "Introduces privacy-preserving execution primitives for autonomous on-chain agents."
 ---
 
 ## SYSTEM OVERVIEW
 
-Shielded x402 implements the HTTP 402 Payment Required standard with privacy-preserving payment channels on Solana. Content creators and API providers can gate access behind micropayments without exposing transaction graphs.
+Shielded x402 is a privacy-first execution layer designed for autonomous agents interacting with paid on-chain services.
 
-The protocol bridges traditional HTTP semantics with on-chain settlement, making pay-per-use APIs and content accessible through standard web infrastructure.
+Agents normally leak strategy through:
+
+- payment flows
+- execution timing
+- service relationships
+
+Shielded x402 enables agents to **discover services via ERC-8004**, perform **instant x402 payments**, and execute actions across **EVM and Solana** while minimizing observable intent leakage.
+
+The system acts as middleware between agents, services, and blockchain settlement.
+
+---
 
 ## ARCHITECTURE
 
-**HTTP Layer** — Middleware that intercepts 402 responses and initiates payment flows. Compatible with any web framework through standard request/response hooks.
+**Discovery Layer**  
+ERC-8004 enables agents to locate payable services and execution endpoints dynamically.
 
-**Channel Layer** — Payment channels that batch micropayments off-chain, settling periodically on Solana. Supports both one-time payments and streaming subscriptions.
+**Shielded Execution**  
+Separates payment origin from execution flow to reduce correlation between agent identity and performed actions.
 
-**Privacy Layer** — Zero-knowledge proofs verify payment validity without revealing payer identity or transaction amounts to content providers.
+**Cross-Chain Settlement**  
+Unified execution interface with native settlement on both EVM networks and Solana programs.
+
+**Instant x402 Flow**  
+Payment authorization and execution occur immediately, with settlement handled asynchronously.
+
+---
 
 ## ENGINEERING CHALLENGES
 
-- **x402 standard compliance** — Implementing the payment negotiation flow within HTTP semantics while maintaining backward compatibility with existing web infrastructure.
+- Designing agent-compatible privacy without sacrificing latency
+- Abstracting execution across EVM and Solana runtimes
+- Maintaining simple SDK integration for services
+- Preventing intent leakage during automated execution
 
-- **Channel state management** — Tracking off-chain payment channel state across distributed nodes with eventual on-chain settlement. Built a custom state machine that handles disputes and timeouts.
+---
 
-- **Privacy-performance tradeoff** — ZK proof generation must happen client-side within acceptable latency. Optimized circuits for browser WASM execution under 200ms.
+## WHY IT MATTERS
 
-- **Integration simplicity** — The SDK must be drop-in for existing web applications. Single middleware function for server-side, single hook for client-side.
+As agents become primary blockchain users, public execution exposes operational intelligence.
+
+Shielded x402 introduces **private programmable execution**, allowing agents to pay and act without revealing strategy or intent.

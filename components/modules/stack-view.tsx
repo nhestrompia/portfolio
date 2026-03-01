@@ -212,6 +212,8 @@ const STACK_DATA = [
       { name: "Next.js", sub: "Meta Framework", active: true },
       { name: "React Native", sub: "Mobile", active: true },
       { name: "TailwindCSS", sub: "Utility Styles", active: true },
+      { name: "Shadcn/ui", sub: "Component Library", active: true },
+      { name: "Styled Components", sub: "CSS", active: true },
       { name: "Framer Motion", sub: "Animation", active: true },
       { name: "React Query", sub: "Data Fetching", active: true },
       { name: "GraphQL", sub: "Query Language", active: true },
@@ -224,13 +226,13 @@ const STACK_DATA = [
     id: "02",
     label: "WEB3",
     entries: [
-      { name: "Solana", sub: "L1 Chain", active: true },
       { name: "Ethereum", sub: "L1 Chain", active: true },
       { name: "Solidity", sub: "Smart Contracts", active: true },
-      { name: "Rust", sub: "Programs", active: true },
-      { name: "Anchor", sub: "Framework", active: true },
       { name: "Foundry", sub: "EVM Tooling", active: true },
       { name: "Wagmi/Viem", sub: "Web3 Client", active: true },
+      { name: "Solana", sub: "L1 Chain", active: true },
+      { name: "Rust", sub: "Programs", active: true },
+      { name: "Anchor", sub: "Framework", active: true },
     ],
   },
   {
@@ -243,7 +245,6 @@ const STACK_DATA = [
       { name: "Prisma", sub: "ORM", active: true },
       { name: "DrizzleORM", sub: "ORM", active: true },
       { name: "WebSocket", sub: "Realtime", active: true },
-      { name: "Custom Indexers", sub: "Data Pipeline", active: true },
     ],
   },
 ];
@@ -270,9 +271,6 @@ export function StackView() {
             </span>
           </div>
           <div className="hidden md:flex items-center gap-4">
-            <span className="text-[8px] font-mono tracking-[0.15em] text-muted-foreground/50">
-              LATENCY 0.12ms
-            </span>
             <span className="text-[8px] font-mono tracking-[0.15em] text-muted-foreground/50">
               HARDWARE_ID: SYS_01
             </span>

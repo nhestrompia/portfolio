@@ -134,10 +134,21 @@ export function ProjectDetail({ meta, content }: ProjectDetailProps) {
       <div className="border-b border-border px-3 md:px-6 py-2 md:py-3 flex items-center justify-between sticky top-0 bg-background/95 backdrop-blur-sm z-10">
         <button
           onClick={handleBack}
-          className="text-[9px] font-mono tracking-[0.15em] text-muted-foreground hover:text-foreground
-                     transition-colors duration-150 cursor-pointer"
+          className="flex items-center gap-1.5 text-[9px] font-mono tracking-[0.15em] text-muted-foreground hover:text-foreground
+                     transition-colors duration-150 cursor-pointer px-2 py-1 -ml-2 rounded-sm hover:bg-muted/50"
         >
-          ← BACK
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          >
+            <path d="M10 3.5L5 7l5 3.5" />
+          </svg>
+          BACK TO SESSION
         </button>
         <div className="flex items-center gap-2 md:gap-3">
           <span className="text-[8px] font-mono tracking-[0.15em] text-muted-foreground">
@@ -145,13 +156,17 @@ export function ProjectDetail({ meta, content }: ProjectDetailProps) {
           </span>
           <span
             className={`text-[8px] font-mono tracking-[0.15em] px-2 py-0.5 rounded-sm ${
-              meta.status === "ACTIVE"
+              meta.status === "ACTIVE" ||
+              meta.status === "LIVE" ||
+              meta.status === "LIVE / BUILDING"
                 ? "bg-led-active/15 text-led-active"
                 : meta.status === "BUILDING"
                   ? "bg-accent/15 text-accent"
                   : meta.status === "NDA"
                     ? "bg-destructive/15 text-destructive"
-                    : "bg-muted text-muted-foreground"
+                    : meta.status === "RESEARCH"
+                      ? "bg-sky-500/15 text-sky-500"
+                      : "bg-muted text-muted-foreground"
             }`}
           >
             {meta.status}
