@@ -1,5 +1,6 @@
 "use client";
 
+import { useHaptics } from "@/lib/haptics";
 import type { ProjectMeta } from "@/lib/projects";
 import { useAudioStore } from "@/store/audio";
 import { useProjectsStore } from "@/store/projects";
@@ -9,6 +10,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { PanelOverlay } from "../modules/panel-overlay";
+
+/* Hook must be called inside functional component — added to SessionTimeline below */
 
 interface SessionTimelineProps {
   projects: ProjectMeta[];
@@ -416,6 +419,7 @@ export function SessionTimeline({ projects }: SessionTimelineProps) {
     return idx >= 0 ? idx : DEFAULT_TRACK_ORDER.indexOf(slug);
   };
   const { playSound } = useAudioStore();
+  const haptics = useHaptics();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
@@ -556,8 +560,9 @@ export function SessionTimeline({ projects }: SessionTimelineProps) {
       setPlayheadPos(pos);
       computeActiveClip(pos);
       playSound("snap");
+      haptics.scrub();
     },
-    [getPositionFromEvent, computeActiveClip, playSound],
+    [getPositionFromEvent, computeActiveClip, playSound, haptics],
   );
 
   const handlePointerMove = useCallback(
@@ -682,6 +687,7 @@ export function SessionTimeline({ projects }: SessionTimelineProps) {
                   onClick={(e) => {
                     e.stopPropagation();
                     playSound("tick");
+                    haptics.tap();
                     router.push(`/session/projects/${project.slug}`);
                   }}
                   whileHover={{ scale: 1.02 }}
@@ -725,6 +731,7 @@ export function SessionTimeline({ projects }: SessionTimelineProps) {
                   onClick={(e) => {
                     e.stopPropagation();
                     playSound("tick");
+                    haptics.tap();
                     useTransportStore.getState().setActivePanel("about");
                   }}
                   whileHover={{ scale: 1.02 }}

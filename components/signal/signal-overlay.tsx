@@ -1,5 +1,6 @@
 "use client";
 
+import { useHaptics } from "@/lib/haptics";
 import { useSignalStore } from "@/store/signal";
 import { AnimatePresence, motion } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -19,6 +20,7 @@ const IDLE_TIMEOUT = 30_000; // 30s auto-suspend per spec
 export function SignalOverlay() {
   const { active, toggle, lastActivity } = useSignalStore();
   const idleTimer = useRef<ReturnType<typeof setInterval>>(undefined);
+  const haptics = useHaptics();
 
   /* Global keyboard toggle: D key + ESC close */
   useEffect(() => {
@@ -90,7 +92,10 @@ export function SignalOverlay() {
             </div>
             <div className="flex items-center gap-2">
               <button
-                onClick={toggle}
+                onClick={() => {
+                  haptics.tap();
+                  toggle();
+                }}
                 className="text-[7px] font-mono text-muted-foreground/40 hover:text-foreground transition-colors cursor-pointer px-1"
               >
                 [ESC]

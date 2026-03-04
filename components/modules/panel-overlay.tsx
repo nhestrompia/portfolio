@@ -1,5 +1,6 @@
 "use client";
 
+import { useHaptics } from "@/lib/haptics";
 import { useAudioStore } from "@/store/audio";
 import { useTransportStore } from "@/store/transport";
 import { AnimatePresence, motion } from "framer-motion";
@@ -28,9 +29,11 @@ export function PanelOverlay() {
 function PanelWrapper({ children }: { children: React.ReactNode }) {
   const { togglePanel } = useTransportStore();
   const { playSound } = useAudioStore();
+  const haptics = useHaptics();
 
   const handleClose = () => {
     playSound("snap");
+    haptics.nudge();
     const current = useTransportStore.getState().activePanel;
     if (current) togglePanel(current);
   };

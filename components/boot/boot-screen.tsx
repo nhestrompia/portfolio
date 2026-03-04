@@ -1,5 +1,6 @@
 "use client";
 
+import { useHaptics } from "@/lib/haptics";
 import { useAudioStore } from "@/store/audio";
 import { useSessionStore } from "@/store/session";
 import { AnimatePresence, motion } from "framer-motion";
@@ -69,12 +70,15 @@ export function BootScreen() {
     return () => clearInterval(progressTimer);
   }, [booted, setBootProgress, setBootCheckItem, completedChecks]);
 
+  const haptics = useHaptics();
+
   const handleEnter = useCallback(() => {
     // Init audio on first interaction & play boot sound
     const audio = useAudioStore.getState();
     if (!audio.context) audio.initContext();
     audio.toggle(); // enable audio
     useAudioStore.getState().playSound("confirm");
+    haptics.trigger("success");
 
     setExiting(true);
     setBoot(true);
@@ -82,7 +86,7 @@ export function BootScreen() {
       setSessionActive(true);
       router.push("/session");
     }, 400);
-  }, [setBoot, setSessionActive, router]);
+  }, [setBoot, setSessionActive, router, haptics]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {

@@ -1,5 +1,6 @@
 "use client";
 
+import { useHaptics } from "@/lib/haptics";
 import { ProjectMeta } from "@/lib/projects";
 import { useAudioStore } from "@/store/audio";
 import { useTracksStore } from "@/store/tracks";
@@ -151,6 +152,7 @@ export function TrackManager({
   const { playSound } = useAudioStore();
 
   const router = useRouter();
+  const haptics = useHaptics();
 
   /* Desired default order */
   const DESIRED_ORDER = [
@@ -228,6 +230,7 @@ export function TrackManager({
         if (dx > DRAG_THRESHOLD || dy > DRAG_THRESHOLD) {
           didDrag.current = true;
           playSound("tick");
+          haptics.tap();
         }
       }
 
@@ -257,6 +260,7 @@ export function TrackManager({
     ) {
       reorderTrack(dragIndex, overIndex);
       playSound("snap");
+      haptics.nudge();
     }
     dragStartPos.current = null;
     setDragIndex(null);
@@ -288,10 +292,12 @@ export function TrackManager({
         onToggleMute={() => {
           toggleMute(track.slug);
           playSound("snap");
+          haptics.nudge();
         }}
         onToggleSolo={() => {
           toggleSolo(track.slug);
           playSound("tick");
+          haptics.tap();
         }}
         onClick={() => {
           /* Only navigate if this wasn't a drag gesture */
@@ -300,6 +306,7 @@ export function TrackManager({
             useTransportStore.getState().setActivePanel("about");
           } else {
             playSound("tick");
+            haptics.tap();
             router.push(`/session/projects/${track.slug}`);
           }
         }}
@@ -315,6 +322,7 @@ export function TrackManager({
           onClick={() => {
             setTrayOpen(!trayOpen);
             playSound("tick");
+            haptics.tap();
           }}
           className="w-full flex items-center justify-between px-4 py-2 cursor-pointer active:bg-bg-active transition-colors"
         >
@@ -357,6 +365,7 @@ export function TrackManager({
                   key={track.slug}
                   onClick={() => {
                     playSound("tick");
+                    haptics.tap();
                     if (track.isAbout) {
                       useTransportStore.getState().setActivePanel("about");
                     } else {

@@ -1,5 +1,6 @@
 "use client";
 
+import { useHaptics } from "@/lib/haptics";
 import { useSignalStore } from "@/store/signal";
 import { useCallback, useEffect, useRef } from "react";
 import * as Tone from "tone";
@@ -119,6 +120,7 @@ export function ToneGenerator() {
     setToneMod,
     toggleTone,
   } = useSignalStore();
+  const haptics = useHaptics();
 
   const oscRef = useRef<Tone.Oscillator | null>(null);
   const lfoRef = useRef<Tone.LFO | null>(null);
@@ -392,6 +394,7 @@ export function ToneGenerator() {
           onClick={() => {
             Tone.start();
             toggleTone();
+            haptics.nudge();
           }}
           className={`text-[7px] font-mono tracking-[0.15em] px-3 py-1 rounded-[2px] border transition-colors cursor-pointer
             ${

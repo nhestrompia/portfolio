@@ -1,6 +1,7 @@
 "use client";
 
 import { LED } from "@/components/ui/led";
+import { useHaptics } from "@/lib/haptics";
 import type { ProjectMeta } from "@/lib/projects";
 import { useAudioStore } from "@/store/audio";
 import { useTracksStore, type TrackProximity } from "@/store/tracks";
@@ -73,6 +74,7 @@ export const TrackLane = forwardRef<HTMLDivElement, TrackLaneProps>(
       useTracksStore();
     const { playSound } = useAudioStore();
     const router = useRouter();
+    const haptics = useHaptics();
 
     const isExpanded = expandedTrack === project.slug;
     const isHovered = hoveredTrack === project.slug;
@@ -83,10 +85,12 @@ export const TrackLane = forwardRef<HTMLDivElement, TrackLaneProps>(
     const handleClick = () => {
       toggleTrack(project.slug);
       playSound("snap");
+      haptics.nudge();
     };
 
     const handleOpenFull = () => {
       playSound("confirm");
+      haptics.success();
       router.push(`/session/projects/${project.slug}`);
     };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useHaptics } from "@/lib/haptics";
 import { useSignalStore, type DrumChannel } from "@/store/signal";
 import { useCallback, useEffect, useRef } from "react";
 
@@ -264,6 +265,7 @@ const TRIGGER_MAP: Record<DrumChannel, TriggerFn> = {
 export function DrumMachine() {
   const { active, litPads, lightPad } = useSignalStore();
   const ctxRef = useRef<AudioContext | null>(null);
+  const haptics = useHaptics();
 
   const getCtx = useCallback(() => {
     if (ctxRef.current && ctxRef.current.state !== "closed")
@@ -278,8 +280,9 @@ export function DrumMachine() {
       if (ctx.state === "suspended") await ctx.resume();
       TRIGGER_MAP[ch](ctx, ctx.currentTime);
       lightPad(ch);
+      haptics.pad();
     },
-    [getCtx, lightPad],
+    [getCtx, lightPad, haptics],
   );
 
   useEffect(() => {

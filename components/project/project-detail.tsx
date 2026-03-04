@@ -1,5 +1,6 @@
 "use client";
 
+import { useHaptics } from "@/lib/haptics";
 import type { ProjectMeta } from "@/lib/projects";
 import { useAudioStore } from "@/store/audio";
 import { motion } from "framer-motion";
@@ -125,10 +126,12 @@ function RenderContent({ body }: { body: string }) {
 export function ProjectDetail({ meta, content }: ProjectDetailProps) {
   const router = useRouter();
   const { playSound } = useAudioStore();
+  const haptics = useHaptics();
   const sections = parseSections(content);
 
   const handleBack = () => {
     playSound("snap");
+    haptics.nudge();
     router.push("/session");
   };
 

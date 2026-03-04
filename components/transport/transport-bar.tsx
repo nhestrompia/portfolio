@@ -1,5 +1,6 @@
 "use client";
 
+import { useHaptics } from "@/lib/haptics";
 import { useAudioStore } from "@/store/audio";
 import { useSignalStore } from "@/store/signal";
 import { useTransportStore, type PanelType } from "@/store/transport";
@@ -26,11 +27,13 @@ export function TransportBar() {
   const signalToggle = useSignalStore((s) => s.toggle);
   const router = useRouter();
   const pathname = usePathname();
+  const haptics = useHaptics();
 
   const isProjectDetail = pathname.startsWith("/session/projects/");
 
   const handleNav = (panel: PanelType) => {
     playSound("tick");
+    haptics.tap();
     if (panel === "projects") {
       if (isProjectDetail) {
         router.push("/session");
@@ -43,6 +46,7 @@ export function TransportBar() {
 
   const handleBack = () => {
     playSound("snap");
+    haptics.nudge();
     if (isProjectDetail) {
       router.push("/session");
     }
@@ -54,6 +58,9 @@ export function TransportBar() {
     const state = useAudioStore.getState();
     if (state.enabled) {
       state.playSound("confirm");
+      haptics.success();
+    } else {
+      haptics.tap();
     }
   };
 
@@ -75,7 +82,10 @@ export function TransportBar() {
 
           {/* Play/Stop */}
           <button
-            onClick={() => setPlaying(!isPlaying)}
+            onClick={() => {
+              haptics.tap();
+              setPlaying(!isPlaying);
+            }}
             className={`w-8 h-8 md:w-9 md:h-9 rounded-full border flex items-center justify-center transition-colors cursor-pointer ${
               isPlaying
                 ? "bg-accent border-accent text-white"
@@ -107,7 +117,10 @@ export function TransportBar() {
 
           {/* Stop */}
           <button
-            onClick={() => setPlaying(false)}
+            onClick={() => {
+              haptics.tap();
+              setPlaying(false);
+            }}
             className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-muted border border-border
                        flex items-center justify-center
                        hover:bg-bg-active transition-colors cursor-pointer"
@@ -130,6 +143,7 @@ export function TransportBar() {
           <button
             onClick={() => {
               playSound("tick");
+              haptics.tap();
               signalToggle();
             }}
             className={`h-7 md:h-8 px-2 rounded-sm border text-[8px] font-mono tracking-[0.15em] transition-colors cursor-pointer ${
