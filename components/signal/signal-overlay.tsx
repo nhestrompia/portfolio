@@ -69,7 +69,7 @@ export function SignalOverlay() {
     <AnimatePresence>
       {active && (
         <motion.div
-          className="fixed bottom-12 left-0 z-50 bg-background border-t border-r border-border/80 overflow-hidden"
+          className="fixed bottom-20 md:bottom-12 left-0 right-0 md:right-auto z-50 bg-background border-t md:border-r border-border/80 overflow-hidden max-h-[calc(100dvh-8rem)] md:max-h-[calc(100dvh-4rem)] flex flex-col"
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 6 }}
@@ -107,10 +107,10 @@ export function SignalOverlay() {
             </div>
           </div>
 
-          {/* ─── Content: side by side ─── */}
-          <div className="flex">
+          {/* ─── Content: stacked on mobile, side by side on desktop ─── */}
+          <div className="flex flex-col md:flex-row overflow-y-auto flex-1 min-h-0">
             {/* Drum section */}
-            <div className="p-3 border-r border-border/30">
+            <div className="p-3 border-b md:border-b-0 md:border-r border-border/30">
               <DrumMachine />
             </div>
             {/* Synth section */}

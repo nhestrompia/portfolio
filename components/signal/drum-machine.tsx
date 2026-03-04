@@ -311,7 +311,7 @@ export function DrumMachine() {
   if (!active) return null;
 
   return (
-    <div className="space-y-2 w-[200px]">
+    <div className="space-y-2 w-full md:w-[200px]">
       {/* Header */}
       <div className="flex items-center gap-2">
         <span className="text-[8px] font-mono tracking-[0.2em] text-muted-foreground">
