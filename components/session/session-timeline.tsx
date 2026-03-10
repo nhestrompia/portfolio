@@ -423,10 +423,12 @@ export function SessionTimeline({ projects }: SessionTimelineProps) {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
-  const playheadRef = useRef(0); // 0–100 percentage
+  const playheadRef = useRef(useTracksStore.getState().playheadPosition * 100); // restore from store (0–100)
   const isDragging = useRef(false);
 
-  const [playheadPos, setPlayheadPos] = useState(0); // for rendering
+  const [playheadPos, setPlayheadPos] = useState(
+    () => useTracksStore.getState().playheadPosition * 100,
+  ); // for rendering
   const [previewProject, setPreviewProject] = useState<ProjectMeta | null>(
     null,
   );

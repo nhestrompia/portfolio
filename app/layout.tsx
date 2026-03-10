@@ -1,4 +1,5 @@
 import { ibmPlexMono, inter, spaceGrotesk } from "@/lib/fonts";
+import { TimerProvider } from "@/lib/timer-context";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
@@ -56,7 +57,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable}`}
     >
       <body className="antialiased overflow-hidden noise-overlay">
-        {children}
+        <TimerProvider>{children}</TimerProvider>
       </body>
     </html>
   );

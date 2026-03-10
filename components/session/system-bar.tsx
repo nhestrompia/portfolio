@@ -1,39 +1,11 @@
 "use client";
 
+import { useTimerContext } from "@/lib/timer-context";
 import { useTransportStore } from "@/store/transport";
-import { useEffect, useRef } from "react";
 
 export function SystemBar() {
-  const { bpm, timecode, setTimecode, isPlaying, loopActive, syncLink } =
-    useTransportStore();
-  const startTimeRef = useRef<number>(0);
-  const frameRef = useRef<number>(0);
-
-  // Running timecode clock
-  useEffect(() => {
-    if (!isPlaying) return;
-
-    startTimeRef.current = Date.now();
-
-    const tick = (): void => {
-      const elapsed = Date.now() - startTimeRef.current;
-      const totalSeconds = Math.floor(elapsed / 1000);
-      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
-      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
-        2,
-        "0",
-      );
-      const seconds = String(totalSeconds % 60).padStart(2, "0");
-      const frames = String(
-        Math.floor((elapsed % 1000) / (1000 / 30)),
-      ).padStart(2, "0");
-      setTimecode(`${hours}:${minutes}:${seconds}:${frames}`);
-      frameRef.current = requestAnimationFrame(tick);
-    };
-
-    frameRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frameRef.current);
-  }, [isPlaying, setTimecode]);
+  const { bpm, loopActive, syncLink } = useTransportStore();
+  const { timecode } = useTimerContext();
 
   return (
     <div className="h-8 md:h-10 bg-background border-b border-border flex items-center justify-between px-2 md:px-4 shrink-0">
