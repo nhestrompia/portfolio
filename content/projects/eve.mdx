@@ -1,0 +1,56 @@
+---
+name: "EVE"
+slug: "eve"
+number: "03"
+category: "PRODUCT HISTORY SYSTEM"
+chain: "LOCAL-FIRST DEVTOOL"
+status: "ACTIVE"
+shortDescription: "Repository-native product history layer that records what changed for users, why it changed, how it was verified, and which Git state shipped it."
+stack:
+  - Go
+  - TypeScript
+  - React
+  - Next.js
+  - Fumadocs
+  - MCP
+links:
+  source: "https://github.com/nhestrompia/eve"
+color: "#e879f9"
+impact: "Adds product meaning to Git history so humans and agents can understand completed work beyond raw diffs."
+---
+
+## SYSTEM OVERVIEW
+
+EVE tracks the product meaning behind completed work.
+
+Git records implementation history. EVE records the completed product unit: what changed for users, why it changed, how it was verified, and which Git state implemented it.
+
+The system stores canonical snapshots inside the repository, making product history portable, reviewable, and available to both humans and coding agents.
+
+## ARCHITECTURE
+
+**CLI Runtime**
+Go commands create, validate, canonicalize, compare, and checkout product snapshots.
+
+**Repository Storage**
+Canonical product records live under `.eve/snapshots`, while artifacts and rebuildable cache data stay colocated with the codebase.
+
+**Local API and UI**
+`eve dev` serves a local runtime, embedded web UI, and API for browsing product history.
+
+**MCP Interface**
+Agent hosts can use EVE over MCP to read and write product history during development workflows.
+
+## ENGINEERING FOCUS
+
+- Keeping Git as the source of truth for implementation facts
+- Capturing product-level decisions, risks, validation, and artifacts
+- Making completed work searchable and comparable
+- Supporting agent workflows without hiding repository state
+- Maintaining a small, local-first snapshot schema
+
+## WHY IT MATTERS
+
+Code diffs explain how software changed, but not always what shipped or why it mattered.
+
+EVE gives repositories a durable product memory that can answer those questions after the implementation details have faded.

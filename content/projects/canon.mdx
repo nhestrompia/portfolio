@@ -1,0 +1,63 @@
+---
+name: "CANON"
+slug: "canon"
+number: "02"
+category: "PRE-TRADE RISK INTELLIGENCE"
+chain: "HYPERLIQUID"
+status: "LIVE"
+shortDescription: "Pre-trade risk intelligence API for onchain agents, validating leveraged trades against live market structure before execution."
+stack:
+  - Rust
+  - TypeScript
+  - Hyperliquid
+  - Next.js
+  - Docusaurus
+  - OpenAPI
+links:
+  demo: "https://canonprotocol.org"
+  source: "https://github.com/canon-ai-protocol/canon-monorepo"
+color: "#22d3ee"
+impact: "Gives autonomous trading systems a fast fail-closed risk gate before capital is committed."
+---
+
+## SYSTEM OVERVIEW
+
+Canon is a pre-trade risk intelligence layer for onchain agents executing leveraged positions.
+
+Before a trade is sent, an agent can call Canon to evaluate order book depth, liquidation proximity, funding divergence, market impact, value-at-risk, and open interest utilization.
+
+The system returns a structured risk score, recommendation, flags, and detailed metrics that can be used to proceed, reduce size, or abort execution.
+
+## CURRENT MODE
+
+STATE: LIVE
+NETWORK: HYPERLIQUID
+SURFACE: API, DOCS, DASHBOARD, AGENT SKILL
+
+Canon is currently focused on Hyperliquid market risk, with a product surface spanning the public API, documentation, dashboard, and agent integration materials.
+
+## ARCHITECTURE
+
+**Risk Engine**
+Combines market microstructure signals into deterministic pre-trade recommendations.
+
+**Market Data Layer**
+Maintains fresh in-memory market snapshots and fail-closed signals for stale or missing data.
+
+**Monitoring Logic**
+Evaluates live positions against breach classes and produces force-unwind verdicts when conditions degrade.
+
+**Agent Integration**
+Provides docs and skill instructions so autonomous systems can validate single trades, batches, and live risk conditions.
+
+## ENGINEERING FOCUS
+
+- Millisecond-grade validation before trade execution
+- Clear recommendation semantics for agents
+- Freshness-aware market data handling
+- Reconciler and monitoring paths for active sessions
+- Documentation that agents and humans can both consume
+
+## STATUS
+
+Canon turns risk analysis into a direct execution primitive for agentic trading systems.

@@ -19,16 +19,18 @@ interface SessionTimelineProps {
 
 /* Clip color mapping — solid, vibrant, matching reference */
 const CLIP_COLORS: Record<string, string> = {
-  tridash: "bg-clip-orange",
   "shielded-x402": "bg-clip-blue",
+  canon: "bg-cyan-400",
+  eve: "bg-fuchsia-400",
   seloria: "bg-violet-400",
   zkblackjack: "bg-emerald-400",
   about: "bg-clip-yellow",
 };
 
 const CLIP_BORDER_COLORS: Record<string, string> = {
-  tridash: "border-foreground/20",
   "shielded-x402": "border-foreground/20",
+  canon: "border-foreground/20",
+  eve: "border-foreground/20",
   seloria: "border-foreground/20",
   zkblackjack: "border-foreground/20",
   about: "border-foreground/20",
@@ -36,8 +38,9 @@ const CLIP_BORDER_COLORS: Record<string, string> = {
 
 /* Badge labels shown on each clip */
 const CLIP_BADGE: Record<string, string> = {
-  tridash: "PREDICTION_ENGINE",
   "shielded-x402": "X402_SDK",
+  canon: "RISK_API",
+  eve: "PRODUCT_HISTORY",
   seloria: "AGENT_CHAIN",
   zkblackjack: "ZK_APP",
   about: "INFO",
@@ -45,8 +48,9 @@ const CLIP_BADGE: Record<string, string> = {
 
 /* Subtitle text for each clip */
 const CLIP_SUBTITLE: Record<string, string> = {
-  tridash: "TRIDASH",
   "shielded-x402": "SHIELDED X402",
+  canon: "CANON",
+  eve: "EVE",
   seloria: "SELORIA",
   zkblackjack: "ZKBLACKJACK",
   about: "BIO & STACK",
@@ -55,30 +59,33 @@ const CLIP_SUBTITLE: Record<string, string> = {
 /* Visualization type per clip */
 type VizType = "waveform" | "midi" | "dots";
 const CLIP_VIZ: Record<string, VizType> = {
-  tridash: "waveform",
   "shielded-x402": "waveform",
+  canon: "dots",
+  eve: "waveform",
   seloria: "midi",
   zkblackjack: "midi",
   about: "waveform",
 };
 
 /* All clip positions as percentage of total duration (0–100) */
-const TOTAL_LANES = 5;
+const TOTAL_LANES = 6;
 
 /* start/width in % of timeline — staggered so each clip plays sequentially */
 const CLIP_LAYOUT: Record<string, { start: number; width: number }> = {
-  about: { start: 2, width: 16 },
-  "shielded-x402": { start: 20, width: 18 },
-  tridash: { start: 40, width: 18 },
-  seloria: { start: 60, width: 18 },
-  zkblackjack: { start: 80, width: 18 },
+  about: { start: 2, width: 13 },
+  "shielded-x402": { start: 17, width: 15 },
+  canon: { start: 34, width: 15 },
+  eve: { start: 51, width: 15 },
+  seloria: { start: 68, width: 14 },
+  zkblackjack: { start: 84, width: 14 },
 };
 
 /* Default order (used if store hasn't been initialised yet) */
 const DEFAULT_TRACK_ORDER = [
   "about",
   "shielded-x402",
-  "tridash",
+  "canon",
+  "eve",
   "seloria",
   "zkblackjack",
 ];
@@ -100,7 +107,7 @@ const RULER_DIVISIONS = 16;
 
 /* Waveform presets — jagged, prominent peaks like the reference */
 const WAVEFORM_PRESETS: Record<string, number[]> = {
-  tridash: [
+  default: [
     50, 30, 65, 18, 78, 12, 85, 25, 70, 8, 88, 22, 75, 15, 82, 10, 90, 28, 68,
     14, 80, 20, 72, 35, 58, 22, 75, 18, 82, 30, 62, 16, 78, 10, 88, 38, 55, 20,
     78, 14, 85, 32, 60, 25, 68, 50,
@@ -137,7 +144,7 @@ function WaveformViz() {
       style={{ opacity: 0.35 }}
     >
       <path
-        d={buildWaveformPath(WAVEFORM_PRESETS.tridash)}
+        d={buildWaveformPath(WAVEFORM_PRESETS.default)}
         fill="white"
         stroke="white"
         strokeWidth="0.5"

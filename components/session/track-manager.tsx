@@ -10,8 +10,9 @@ import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 
 /* Color mapping for project clips */
 const CLIP_DOT_COLORS: Record<string, string> = {
-  tridash: "bg-clip-orange",
   "shielded-x402": "bg-clip-blue",
+  canon: "bg-cyan-400",
+  eve: "bg-fuchsia-400",
   seloria: "bg-violet-400",
   zkblackjack: "bg-emerald-400",
   about: "bg-clip-yellow",
@@ -158,7 +159,8 @@ export function TrackManager({
   const DESIRED_ORDER = [
     "about",
     "shielded-x402",
-    "tridash",
+    "canon",
+    "eve",
     "seloria",
     "zkblackjack",
   ];
@@ -248,7 +250,7 @@ export function TrackManager({
         }
       }
     },
-    [dragIndex, playSound],
+    [dragIndex, playSound, haptics],
   );
 
   const handleDragEnd = useCallback(() => {
@@ -265,7 +267,7 @@ export function TrackManager({
     dragStartPos.current = null;
     setDragIndex(null);
     setOverIndex(null);
-  }, [dragIndex, overIndex, reorderTrack, playSound]);
+  }, [dragIndex, overIndex, reorderTrack, playSound, haptics]);
 
   /* ── Tray (mobile) collapse state ── */
   const [trayOpen, setTrayOpen] = useState(false);
