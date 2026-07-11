@@ -33,8 +33,8 @@ export interface Project {
 }
 
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
-// Keep the MDX around, but hide TriDash from the portfolio for now.
-const HIDDEN_PROJECT_SLUGS = new Set(["tridash"]);
+// Keep the MDX files around, but hide these projects from the portfolio for now.
+const HIDDEN_PROJECT_SLUGS = new Set(["canon", "tridash"]);
 
 export function getAllProjects(): ProjectMeta[] {
   if (!fs.existsSync(PROJECTS_DIR)) return [];

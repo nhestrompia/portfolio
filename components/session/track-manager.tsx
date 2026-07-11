@@ -11,7 +11,6 @@ import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 /* Color mapping for project clips */
 const CLIP_DOT_COLORS: Record<string, string> = {
   "shielded-x402": "bg-clip-blue",
-  canon: "bg-cyan-400",
   eve: "bg-fuchsia-400",
   seloria: "bg-violet-400",
   zkblackjack: "bg-emerald-400",
@@ -159,7 +158,6 @@ export function TrackManager({
   const DESIRED_ORDER = [
     "about",
     "shielded-x402",
-    "canon",
     "eve",
     "seloria",
     "zkblackjack",
