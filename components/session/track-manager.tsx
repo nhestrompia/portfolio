@@ -10,6 +10,8 @@ import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 
 /* Color mapping for project clips */
 const CLIP_DOT_COLORS: Record<string, string> = {
+  "rival-markets": "bg-rose-400",
+  spaawner: "bg-sky-400",
   "shielded-x402": "bg-clip-blue",
   eve: "bg-fuchsia-400",
   seloria: "bg-violet-400",
@@ -157,6 +159,8 @@ export function TrackManager({
   /* Desired default order */
   const DESIRED_ORDER = [
     "about",
+    "rival-markets",
+    "spaawner",
     "shielded-x402",
     "eve",
     "seloria",

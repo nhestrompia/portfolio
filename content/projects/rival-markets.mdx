@@ -1,0 +1,53 @@
+---
+name: "RIVAL MARKETS"
+slug: "rival-markets"
+number: "01"
+category: "PERPETUAL RIVALRY MARKETS"
+chain: "ROBINHOOD CHAIN"
+status: "BUILDING"
+shortDescription: "Perpetual, non-resolving rivalry markets with live EVM data, daily battle cycles, and on-chain prize accounting."
+stack:
+  - Next.js
+  - TypeScript
+  - Solidity
+  - Foundry
+  - Envio HyperIndex
+  - Supabase
+  - PostgreSQL
+  - Cloudflare Workers
+links:
+  demo: "https://rival-markets-web-ten.vercel.app"
+color: "#fb7185"
+impact: "Lets participants trade open-ended rivalries and verify market activity and prize handling on-chain."
+---
+
+## SYSTEM OVERVIEW
+
+Rival Markets runs perpetual rivalry markets that stay open instead of resolving against a one-time external outcome. The EVM protocol owns market state and recurring daily battle cycles.
+
+The application combines live contract reads with indexed event history so market activity and prize flows can be inspected over time.
+
+## DAILY BATTLES
+
+A scheduled battle keeper opens the next daily battle. On-chain accounting handles prize funding and redemption, while an optional feed worker ingests market-relevant news for the application.
+
+## ARCHITECTURE
+
+**Protocol**  
+Solidity contracts manage markets, battle rollovers, and prize accounting. Foundry and Anvil support contract development and local EVM runs.
+
+**Event history**  
+Envio HyperIndex indexes EVM events and exposes historical data through GraphQL.
+
+**Application and API**  
+The Next.js application uses a TypeScript API that combines Envio history with live state from EVM RPC.
+
+**Workers and storage**  
+TypeScript feed and battle-keeper workers handle scheduled work. Supabase PostgreSQL stores application-owned data; historical on-chain events remain in Envio.
+
+## ENGINEERING FOCUS
+
+- Keeping rivalry markets open without outcome resolution
+- Joining live contract state with reorg-aware event history
+- Running daily battle and prize cycles on-chain
+- Separating application data from protocol history

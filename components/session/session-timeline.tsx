@@ -19,6 +19,8 @@ interface SessionTimelineProps {
 
 /* Clip color mapping — solid, vibrant, matching reference */
 const CLIP_COLORS: Record<string, string> = {
+  "rival-markets": "bg-rose-400",
+  spaawner: "bg-sky-400",
   "shielded-x402": "bg-clip-blue",
   eve: "bg-fuchsia-400",
   seloria: "bg-violet-400",
@@ -27,6 +29,8 @@ const CLIP_COLORS: Record<string, string> = {
 };
 
 const CLIP_BORDER_COLORS: Record<string, string> = {
+  "rival-markets": "border-foreground/20",
+  spaawner: "border-foreground/20",
   "shielded-x402": "border-foreground/20",
   eve: "border-foreground/20",
   seloria: "border-foreground/20",
@@ -36,6 +40,8 @@ const CLIP_BORDER_COLORS: Record<string, string> = {
 
 /* Badge labels shown on each clip */
 const CLIP_BADGE: Record<string, string> = {
+  "rival-markets": "RIVAL_MARKETS",
+  spaawner: "TOKEN_LAUNCHPAD",
   "shielded-x402": "X402_SDK",
   eve: "PRODUCT_HISTORY",
   seloria: "AGENT_CHAIN",
@@ -45,6 +51,8 @@ const CLIP_BADGE: Record<string, string> = {
 
 /* Subtitle text for each clip */
 const CLIP_SUBTITLE: Record<string, string> = {
+  "rival-markets": "RIVAL MARKETS",
+  spaawner: "SPAAWNER",
   "shielded-x402": "SHIELDED X402",
   eve: "EVE",
   seloria: "SELORIA",
@@ -55,6 +63,8 @@ const CLIP_SUBTITLE: Record<string, string> = {
 /* Visualization type per clip */
 type VizType = "waveform" | "midi" | "dots";
 const CLIP_VIZ: Record<string, VizType> = {
+  "rival-markets": "dots",
+  spaawner: "waveform",
   "shielded-x402": "waveform",
   eve: "waveform",
   seloria: "midi",
@@ -63,20 +73,24 @@ const CLIP_VIZ: Record<string, VizType> = {
 };
 
 /* All clip positions as percentage of total duration (0–100) */
-const TOTAL_LANES = 5;
+const TOTAL_LANES = 7;
 
 /* start/width in % of timeline — staggered so each clip plays sequentially */
 const CLIP_LAYOUT: Record<string, { start: number; width: number }> = {
-  about: { start: 2, width: 16 },
-  "shielded-x402": { start: 20, width: 18 },
-  eve: { start: 40, width: 18 },
-  seloria: { start: 60, width: 18 },
-  zkblackjack: { start: 80, width: 18 },
+  about: { start: 2, width: 12 },
+  "rival-markets": { start: 16, width: 12 },
+  spaawner: { start: 30, width: 12 },
+  "shielded-x402": { start: 44, width: 12 },
+  eve: { start: 58, width: 12 },
+  seloria: { start: 72, width: 12 },
+  zkblackjack: { start: 86, width: 12 },
 };
 
 /* Default order (used if store hasn't been initialised yet) */
 const DEFAULT_TRACK_ORDER = [
   "about",
+  "rival-markets",
+  "spaawner",
   "shielded-x402",
   "eve",
   "seloria",

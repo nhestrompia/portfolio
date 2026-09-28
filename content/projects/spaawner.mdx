@@ -1,0 +1,60 @@
+---
+name: "SPAAWNER"
+slug: "spaawner"
+number: "02"
+category: "MULTI-TENANT TOKEN LAUNCHPAD"
+chain: "ROBINHOOD CHAIN"
+status: "BUILDING"
+shortDescription: "A shared token launch platform for branded launchpads, curated token pairs, and locked Uniswap v4 liquidity."
+stack:
+  - React
+  - Vite
+  - TypeScript
+  - Tailwind CSS
+  - shadcn/ui
+  - wagmi
+  - viem
+  - Solidity
+  - Foundry
+  - Supabase PostgreSQL
+  - Drizzle ORM
+  - Envio HyperIndex
+  - Cloudflare Workers
+links:
+  demo: "https://spaawner.xyz"
+color: "#3b82f6"
+impact: "Gives communities their own branded launch surface while keeping launch policy, attribution, and fee accounting on-chain."
+---
+
+## SYSTEM OVERVIEW
+
+Spaawner is a shared, multi-tenant token launchpad. Owners configure and publish branded Tenant Launchpads; token creators use those public surfaces to launch fixed-supply tokens against platform-curated pairs.
+
+Each tenant has its own on-chain policy and revenue accounting while sharing one launch engine.
+
+## ON-CHAIN LAUNCH FLOW
+
+A shared factory creates a dedicated Tenant Launchpad contract. The tenant checks launch access and fees, then delegates token and curve creation to the shared engine.
+
+A Pons V2-style curve can graduate in a retryable flow to a full-range Uniswap v4 position whose liquidity principal stays locked.
+
+## ARCHITECTURE
+
+**Control plane and launch surfaces**  
+The React and Vite application contains the owner control plane and branded public launch surfaces, backed by a Hono API.
+
+**Wallet and contracts**  
+Turnkey authenticates launchpad owners; wagmi and viem handle wallet interactions. Solidity contracts define tenant policy, launches, and fee accounting, with Foundry for development.
+
+**Event projection**  
+Envio indexes contract events. A scheduled Cloudflare Worker projects them into Supabase PostgreSQL for discovery and public launch views.
+
+**Data ownership**  
+The chain is authoritative for ownership, policy, attribution, and economics. Supabase stores branding, drafts, discovery data, and rebuildable projections.
+
+## ENGINEERING FOCUS
+
+- Giving each tenant independent launch policy and revenue accounting
+- Restricting markets to curated native, stock-token, and token pairs
+- Keeping curve fees denominated in the selected pair asset
+- Recovering cleanly from interrupted liquidity graduation
