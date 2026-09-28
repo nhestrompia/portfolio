@@ -2,10 +2,10 @@
 name: "SPAAWNER"
 slug: "spaawner"
 number: "02"
-category: "MULTI-TENANT TOKEN LAUNCHPAD"
+category: "LAUNCHPAD LAUNCHER"
 chain: "ROBINHOOD CHAIN"
 status: "BUILDING"
-shortDescription: "A shared token launch platform for branded launchpads, curated token pairs, and locked Uniswap v4 liquidity."
+shortDescription: "A launchpad launcher for creating branded launchpads with customized design, rules, and tax settings, then launching tokens through them."
 stack:
   - React
   - Vite
@@ -23,28 +23,28 @@ stack:
 links:
   demo: "https://spaawner.xyz"
 color: "#3b82f6"
-impact: "Gives communities their own branded launch surface while keeping launch policy, attribution, and fee accounting on-chain."
+impact: "Lets communities operate launchpads tailored to their brand and economics while keeping token launches attributable to the launchpad that created them."
 ---
 
 ## SYSTEM OVERVIEW
 
-Spaawner is a shared, multi-tenant token launchpad. Owners configure and publish branded Tenant Launchpads; token creators use those public surfaces to launch fixed-supply tokens against platform-curated pairs.
+Spaawner is a launchpad launcher. An owner creates and publishes a branded launchpad, customizing its design, access rules, supply, launch economics, and creator tax policy. Token creators then use that launchpad's public surface to launch tokens under its settings.
 
-Each tenant has its own on-chain policy and revenue accounting while sharing one launch engine.
+Each launchpad gets its own public storefront and on-chain policy and revenue accounting, while all launchpads share one token launch engine.
 
-## ON-CHAIN LAUNCH FLOW
+## LAUNCHPAD-TO-TOKEN FLOW
 
-A shared factory creates a dedicated Tenant Launchpad contract. The tenant checks launch access and fees, then delegates token and curve creation to the shared engine.
+The owner publishes a launchpad through the shared factory, creating a dedicated Tenant Launchpad contract. That contract enforces the owner's launch access and economic settings. Token creators select an approved pair and launch a fixed-supply token through the launchpad, which records attribution and fee accounting on-chain.
 
-A Pons V2-style curve can graduate in a retryable flow to a full-range Uniswap v4 position whose liquidity principal stays locked.
+Each token starts on a Pons V2-style curve and can graduate through a retryable flow to a full-range Uniswap v4 position whose liquidity principal stays locked.
 
 ## ARCHITECTURE
 
-**Control plane and launch surfaces**  
-The React and Vite application contains the owner control plane and branded public launch surfaces, backed by a Hono API.
+**Launchpad builder and public launch surfaces**
+The React and Vite application lets owners customize and publish launchpads, and gives token creators a branded surface for launching through them. A Hono API supports the application.
 
 **Wallet and contracts**  
-Turnkey authenticates launchpad owners; wagmi and viem handle wallet interactions. Solidity contracts define tenant policy, launches, and fee accounting, with Foundry for development.
+Dynamic authenticates launchpad owners; wagmi and viem handle wallet interactions. Solidity contracts define tenant policy, launches, and fee accounting, with Foundry for development.
 
 **Event projection**  
 Envio indexes contract events. A scheduled Cloudflare Worker projects them into Supabase PostgreSQL for discovery and public launch views.
@@ -54,7 +54,8 @@ The chain is authoritative for ownership, policy, attribution, and economics. Su
 
 ## ENGINEERING FOCUS
 
-- Giving each tenant independent launch policy and revenue accounting
+- Letting each owner launch a branded launchpad with its own rules and economics
+- Attributing token launches and fee accounting to the launchpad used
 - Restricting markets to curated native, stock-token, and token pairs
 - Keeping curve fees denominated in the selected pair asset
 - Recovering cleanly from interrupted liquidity graduation
